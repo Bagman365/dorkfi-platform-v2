@@ -43,6 +43,7 @@ const HealthFactorChart = () => {
     <ChartCard 
       title="Health Factor Distribution" 
       subtitle="Borrower risk levels (<1.0 highlighted)"
+      tooltip="Distribution of borrower health factors. Values below 1.0 are liquidatable, 1.0-1.1 are high risk, above 1.5 are safe."
     >
       <ResponsiveContainer width="100%" height="100%">
         <BarChart data={healthFactorData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>

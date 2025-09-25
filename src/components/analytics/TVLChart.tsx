@@ -57,7 +57,11 @@ const TVLChart = () => {
   };
 
   return (
-    <ChartCard title="TVL Growth" controls={controls}>
+    <ChartCard 
+      title="TVL Growth" 
+      controls={controls}
+      tooltip="Shows the total value locked in the protocol over time. Toggle between total view and per-asset breakdown."
+    >
       <ResponsiveContainer width="100%" height="100%">
         {viewMode === 'total' ? (
           <LineChart data={tvlData}>

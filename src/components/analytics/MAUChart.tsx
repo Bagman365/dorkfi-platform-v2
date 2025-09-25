@@ -40,7 +40,11 @@ const MAUChart = () => {
   };
 
   return (
-    <ChartCard title="Monthly Active Users" subtitle="User engagement by activity type">
+    <ChartCard 
+      title="Monthly Active Users" 
+      subtitle="User engagement by activity type"
+      tooltip="Shows monthly active users broken down by activity: lending, borrowing, and staking. Indicates protocol adoption and usage patterns."
+    >
       <ResponsiveContainer width="100%" height="100%">
         <BarChart data={mauData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
           <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />

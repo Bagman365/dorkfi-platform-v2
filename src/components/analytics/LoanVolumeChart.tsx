@@ -35,7 +35,11 @@ const LoanVolumeChart = () => {
 
   return (
     <div className="space-y-4">
-      <ChartCard title="Loan Volume vs Repayments" subtitle="Daily lending activity">
+    <ChartCard 
+      title="Loan Volume vs Repayments" 
+      subtitle="Daily lending activity"
+      tooltip="Daily volume of new loans versus repayments. Shows lending activity and liquidity flow patterns."
+    >
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={loanData.volume}>
             <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />

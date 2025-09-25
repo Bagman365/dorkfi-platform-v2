@@ -54,7 +54,11 @@ const LiquidationsChart = () => {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
       {/* Scatter Timeline */}
-      <ChartCard title="Liquidation Events" subtitle="Daily volume & count (30 days)">
+      <ChartCard 
+        title="Liquidation Events" 
+        subtitle="Daily volume & count (30 days)"
+        tooltip="Scatter plot showing daily liquidation events. Dot size represents volume, position shows frequency over time."
+      >
         <ResponsiveContainer width="100%" height="100%">
           <ScatterChart data={liquidationData.events}>
             <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
@@ -78,7 +82,11 @@ const LiquidationsChart = () => {
       </ChartCard>
 
       {/* Recovery vs Bonuses */}
-      <ChartCard title="Liquidation Recovery" subtitle="Collateral recovered vs liquidator bonuses">
+      <ChartCard 
+        title="Liquidation Recovery" 
+        subtitle="Collateral recovered vs liquidator bonuses"
+        tooltip="Monthly breakdown of liquidation outcomes: total collateral recovered and bonuses paid to liquidators."
+      >
         <ResponsiveContainer width="100%" height="100%">
           <ComposedChart data={liquidationData.recovery}>
             <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />

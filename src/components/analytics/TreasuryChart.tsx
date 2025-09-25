@@ -47,7 +47,11 @@ const TreasuryChart = () => {
   };
 
   return (
-    <ChartCard title="Insurance & Treasury" subtitle="Holdings composition & growth">
+    <ChartCard 
+      title="Insurance & Treasury" 
+      subtitle="Holdings composition & growth"
+      tooltip="Protocol treasury holdings and insurance fund composition. Shows asset diversification and fund growth over time."
+    >
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 h-full">
         {/* Doughnut Chart */}
         <div className="flex flex-col">

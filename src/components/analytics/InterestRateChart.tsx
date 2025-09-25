@@ -62,6 +62,7 @@ const InterestRateChart = () => {
       title="Interest Rate Trends" 
       subtitle="Supply vs Borrow APY by asset"
       controls={controls}
+      tooltip="Interest rates over time for lending (supply) and borrowing. Dashed lines show supply APY, solid lines show borrow APY."
     >
       <ResponsiveContainer width="100%" height="100%">
         <LineChart data={getFilteredData()}>

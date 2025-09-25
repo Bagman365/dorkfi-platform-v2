@@ -33,7 +33,11 @@ const AssetDistributionChart = () => {
   };
 
   return (
-    <ChartCard title="Asset Distribution" subtitle="Deposits vs Borrows by asset">
+    <ChartCard 
+      title="Asset Distribution" 
+      subtitle="Deposits vs Borrows by asset"
+      tooltip="Distribution of deposits and borrows across different assets. Shows which assets are most popular for lending and borrowing."
+    >
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 h-full">
         {/* Deposits Chart */}
         <div className="flex flex-col">

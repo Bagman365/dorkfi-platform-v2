@@ -39,7 +39,11 @@ const UtilizationChart = () => {
   };
 
   return (
-    <ChartCard title="Utilization Rates" subtitle="Borrowed vs Supplied by Asset">
+    <ChartCard 
+      title="Utilization Rates" 
+      subtitle="Borrowed vs Supplied by Asset"
+      tooltip="Shows how much of each asset is being borrowed relative to what's supplied. Higher utilization indicates strong demand."
+    >
       <ResponsiveContainer width="100%" height="100%">
         <BarChart data={utilizationData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
           <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
