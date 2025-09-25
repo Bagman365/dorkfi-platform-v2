@@ -7,6 +7,7 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import Index from "./pages/Index";
+import Analytics from "./pages/Analytics";
 import LiquidationMarkets from "./pages/LiquidationMarkets";
 import NotFound from "./pages/NotFound";
 
@@ -20,9 +21,11 @@ function AppContent() {
   useEffect(() => {
     if (location.pathname === '/liquidation-markets') {
       setActiveTab('liquidations');
+    } else if (location.pathname === '/analytics') {
+      setActiveTab('analytics');
     } else if (location.pathname === '/') {
       // Only set to dashboard if we're not already on a specific tab
-      if (activeTab === 'liquidations') {
+      if (activeTab === 'liquidations' || activeTab === 'analytics') {
         setActiveTab('dashboard');
       }
     }
@@ -31,6 +34,7 @@ function AppContent() {
   return (
     <Routes>
       <Route path="/" element={<Index activeTab={activeTab} onTabChange={setActiveTab} />} />
+      <Route path="/analytics" element={<Analytics activeTab={activeTab} onTabChange={setActiveTab} />} />
       <Route path="/liquidation-markets" element={<LiquidationMarkets activeTab={activeTab} onTabChange={setActiveTab} />} />
       {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
       <Route path="*" element={<NotFound />} />
