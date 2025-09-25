@@ -40,9 +40,9 @@ const Header = ({ activeTab, onTabChange }: HeaderProps) => {
     { value: 'dashboard', label: 'Dashboard' },
     { value: 'markets', label: 'Markets' },
     { value: 'portfolio', label: 'Portfolio' },
-    { value: 'analytics', label: 'Analytics' },
     { value: 'liquidations', label: 'Liquidations' },
     { value: 'swap', label: 'Swap' },
+    { value: 'analytics', label: 'Analytics' },
   ];
 
   return (
