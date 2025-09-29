@@ -53,7 +53,7 @@ const WADCirculationChart = () => {
       <ChartCard title="WAD Supply Growth" className="lg:col-span-2">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={wadData.supplyData}>
-            <CartesianGrid strokeDasharray="3 3" stroke={theme === 'dark' ? 'rgb(51, 65, 85)' : 'rgb(226, 232, 240)'} />
+            <CartesianGrid strokeDasharray="3 3" stroke={theme === 'dark' ? 'rgb(30, 41, 59)' : 'rgb(226, 232, 240)'} />
             <XAxis 
               dataKey="date" 
               tick={{ fontSize: 12 }}

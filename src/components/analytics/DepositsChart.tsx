@@ -1,10 +1,12 @@
 import React from 'react';
-import { Area, AreaChart, ResponsiveContainer, XAxis, YAxis, Tooltip } from 'recharts';
+import { Area, AreaChart, ResponsiveContainer, XAxis, YAxis, Tooltip, CartesianGrid } from 'recharts';
 import ChartCard from './ChartCard';
 import { useAnalyticsData } from '@/hooks/useAnalyticsData';
+import { useTheme } from 'next-themes';
 
 const DepositsChart = () => {
   const { depositsData, loading } = useAnalyticsData();
+  const { theme } = useTheme();
 
   if (loading) {
     return (
@@ -36,6 +38,7 @@ const DepositsChart = () => {
     >
       <ResponsiveContainer width="100%" height="100%">
         <AreaChart data={chartData}>
+          <CartesianGrid strokeDasharray="3 3" stroke={theme === 'dark' ? 'rgb(30, 41, 59)' : 'rgb(226, 232, 240)'} />
           <defs>
             <linearGradient id="depositsGradient" x1="0" y1="0" x2="0" y2="1">
               <stop offset="5%" stopColor="hsl(var(--ocean-teal))" stopOpacity={0.3}/>

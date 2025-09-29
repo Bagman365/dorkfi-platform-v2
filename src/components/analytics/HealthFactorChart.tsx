@@ -49,7 +49,7 @@ const HealthFactorChart = () => {
     >
       <ResponsiveContainer width="100%" height="100%">
         <BarChart data={healthFactorData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke={theme === 'dark' ? 'rgb(51, 65, 85)' : 'rgb(226, 232, 240)'} />
+          <CartesianGrid strokeDasharray="3 3" stroke={theme === 'dark' ? 'rgb(30, 41, 59)' : 'rgb(226, 232, 240)'} />
           <XAxis 
             dataKey="range" 
             tick={{ fontSize: 12 }}
