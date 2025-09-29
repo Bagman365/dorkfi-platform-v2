@@ -1,4 +1,5 @@
 import React, { useMemo } from "react";
+import RiskBarVertical from "./RiskBarVertical";
 
 type Props = {
   healthFactor: number;
@@ -74,6 +75,7 @@ export default function HealthWaterGauge({ healthFactor, avatarSrc }: Props) {
 
       {/* Numbers & copy */}
       <div className="flex flex-col gap-3">
+        <RiskBarVertical hf={hf} />
         <div className="text-4xl font-semibold text-foreground">{hf.toFixed(2)}</div>
         <div
           className={`text-lg font-medium ${
