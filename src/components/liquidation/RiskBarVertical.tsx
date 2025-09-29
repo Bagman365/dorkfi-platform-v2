@@ -15,7 +15,7 @@ export default function RiskBarVertical({
         style={{ bottom: `${bottomPct}%` }}
       />
       {/* Tick labels (hide on xs) */}
-      <div className="absolute -right-10 inset-y-0 hidden sm:block text-xs leading-none text-white/70 font-medium">
+      <div className="absolute -right-16 inset-y-0 hidden sm:block text-sm leading-none text-white/80 font-semibold">
         <span className="absolute top-0">High Risk</span>
         <span className="absolute top-1/2 -translate-y-1/2">Mid Risk</span>
         <span className="absolute bottom-0">Low Risk</span>
