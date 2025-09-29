@@ -3,9 +3,11 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContaine
 import ChartCard from './ChartCard';
 import { useAnalyticsData } from '@/hooks/useAnalyticsData';
 import { formatNumber } from '@/utils/analyticsUtils';
+import { useTheme } from 'next-themes';
 
 const MAUChart = () => {
   const { mauData, loading } = useAnalyticsData();
+  const { theme } = useTheme();
 
   if (loading) {
     return (
@@ -47,7 +49,7 @@ const MAUChart = () => {
     >
       <ResponsiveContainer width="100%" height="100%">
         <BarChart data={mauData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
-          <CartesianGrid strokeDasharray="3 3" className="stroke-border/30 dark:stroke-slate-700" />
+          <CartesianGrid strokeDasharray="3 3" stroke={theme === 'dark' ? 'rgb(51, 65, 85)' : 'rgb(226, 232, 240)'} />
           <XAxis dataKey="month" tick={{ fontSize: 12 }} />
           <YAxis 
             tick={{ fontSize: 12 }}

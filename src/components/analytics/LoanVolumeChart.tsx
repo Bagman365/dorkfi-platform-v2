@@ -3,9 +3,11 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContai
 import ChartCard from './ChartCard';
 import { useAnalyticsData } from '@/hooks/useAnalyticsData';
 import { formatCurrency, formatChartDate } from '@/utils/analyticsUtils';
+import { useTheme } from 'next-themes';
 
 const LoanVolumeChart = () => {
   const { loanData, loading } = useAnalyticsData();
+  const { theme } = useTheme();
 
   if (loading || !loanData) {
     return (
@@ -42,7 +44,7 @@ const LoanVolumeChart = () => {
     >
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={loanData.volume}>
-            <CartesianGrid strokeDasharray="3 3" className="stroke-border/30 dark:stroke-slate-700" />
+            <CartesianGrid strokeDasharray="3 3" stroke={theme === 'dark' ? 'rgb(51, 65, 85)' : 'rgb(226, 232, 240)'} />
             <XAxis 
               dataKey="date" 
               tick={{ fontSize: 12 }}

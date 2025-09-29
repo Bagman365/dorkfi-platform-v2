@@ -3,9 +3,11 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContaine
 import ChartCard from './ChartCard';
 import { useAnalyticsData } from '@/hooks/useAnalyticsData';
 import { formatCurrency, formatPercentage } from '@/utils/analyticsUtils';
+import { useTheme } from 'next-themes';
 
 const UtilizationChart = () => {
   const { utilizationData, loading } = useAnalyticsData();
+  const { theme } = useTheme();
 
   if (loading) {
     return (
@@ -46,7 +48,7 @@ const UtilizationChart = () => {
     >
       <ResponsiveContainer width="100%" height="100%">
         <BarChart data={utilizationData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
-          <CartesianGrid strokeDasharray="3 3" className="stroke-border/30 dark:stroke-slate-700" />
+          <CartesianGrid strokeDasharray="3 3" stroke={theme === 'dark' ? 'rgb(51, 65, 85)' : 'rgb(226, 232, 240)'} />
           <XAxis dataKey="asset" tick={{ fontSize: 12 }} />
           <YAxis 
             tick={{ fontSize: 12 }}

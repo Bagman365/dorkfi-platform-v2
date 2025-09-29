@@ -3,9 +3,11 @@ import { ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, Responsive
 import ChartCard from './ChartCard';
 import { useAnalyticsData } from '@/hooks/useAnalyticsData';
 import { formatCurrency, formatChartDate } from '@/utils/analyticsUtils';
+import { useTheme } from 'next-themes';
 
 const LiquidationsChart = () => {
   const { liquidationData, loading } = useAnalyticsData();
+  const { theme } = useTheme();
 
   if (loading || !liquidationData) {
     return (
@@ -43,7 +45,7 @@ const LiquidationsChart = () => {
     >
       <ResponsiveContainer width="100%" height="100%">
         <ScatterChart data={liquidationData.events}>
-          <CartesianGrid strokeDasharray="3 3" className="stroke-border/30 dark:stroke-slate-700" />
+          <CartesianGrid strokeDasharray="3 3" stroke={theme === 'dark' ? 'rgb(51, 65, 85)' : 'rgb(226, 232, 240)'} />
           <XAxis 
             dataKey="date" 
             tick={{ fontSize: 10 }}

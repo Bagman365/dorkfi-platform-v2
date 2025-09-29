@@ -4,9 +4,11 @@ import ChartCard from './ChartCard';
 import { Button } from '@/components/ui/button';
 import { useAnalyticsData } from '@/hooks/useAnalyticsData';
 import { formatPercentage, formatChartDate } from '@/utils/analyticsUtils';
+import { useTheme } from 'next-themes';
 
 const InterestRateChart = () => {
   const { interestRateData, loading } = useAnalyticsData();
+  const { theme } = useTheme();
   const [timeRange, setTimeRange] = useState<'7d' | '30d' | '90d'>('30d');
 
   if (loading) {
@@ -66,7 +68,7 @@ const InterestRateChart = () => {
     >
       <ResponsiveContainer width="100%" height="100%">
         <LineChart data={getFilteredData()}>
-          <CartesianGrid strokeDasharray="3 3" className="stroke-border/30 dark:stroke-slate-700" />
+          <CartesianGrid strokeDasharray="3 3" stroke={theme === 'dark' ? 'rgb(51, 65, 85)' : 'rgb(226, 232, 240)'} />
           <XAxis 
             dataKey="date" 
             tick={{ fontSize: 12 }}
