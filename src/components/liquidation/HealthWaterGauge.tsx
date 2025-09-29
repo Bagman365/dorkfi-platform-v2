@@ -1,5 +1,7 @@
 import React, { useMemo } from "react";
 import RiskBarVertical from "./RiskBarVertical";
+import { Badge } from "@/components/ui/badge";
+import { useRiskLevel } from "@/hooks/useRiskLevel";
 import {
   Tooltip,
   TooltipContent,
@@ -14,6 +16,7 @@ type Props = {
 
 export default function HealthWaterGauge({ healthFactor, avatarSrc }: Props) {
   const hf = Math.max(0.8, Math.min(3.0, healthFactor));
+  const riskLevel = useRiskLevel(hf);
 
   // Map HF -> water height (lower HF = more water)
   // 3.0 -> 10%, 1.2 -> 75%, 0.8 -> 92%
@@ -21,9 +24,6 @@ export default function HealthWaterGauge({ healthFactor, avatarSrc }: Props) {
     const t = (3.0 - hf) / (3.0 - 0.8);
     return Math.round(10 + t * 82);
   }, [hf]);
-
-  const risk =
-    hf >= 2.0 ? "Low Risk" : hf >= 1.2 ? "Mid Risk" : "High Risk";
 
   return (
     <TooltipProvider>
@@ -96,6 +96,16 @@ export default function HealthWaterGauge({ healthFactor, avatarSrc }: Props) {
 
         {/* Vertical gauge matches parent height */}
         <RiskBarVertical hf={hf} className="h-full" />
+      </div>
+
+      {/* Dynamic Risk Badge centered under the image */}
+      <div className="flex justify-center" style={{ width: '260px' }}>
+        <Badge 
+          variant={hf <= 1.0 ? 'destructive' : hf <= 1.2 ? 'secondary' : 'outline'}
+          className={`${riskLevel.color} ${riskLevel.bg} border-current`}
+        >
+          {riskLevel.label}
+        </Badge>
       </div>
 
       {/* Metrics block aligned with bar */}
