@@ -76,11 +76,15 @@ export default function HealthWaterGauge({ healthFactor, avatarSrc }: Props) {
         
         {/* Health factor number below image */}
         <div className="text-4xl font-semibold text-foreground text-center">{hf.toFixed(2)}</div>
+        
+        {/* Risk bar below number */}
+        <div className="flex justify-center">
+          <RiskBarVertical hf={hf} />
+        </div>
       </div>
 
       {/* Risk info & copy */}
       <div className="flex flex-col gap-3">
-        <RiskBarVertical hf={hf} />
         <div
           className={`text-lg font-medium ${
             hf >= 2.0 ? "text-ocean-teal" : hf >= 1.2 ? "text-whale-gold" : "text-destructive"
