@@ -19,7 +19,7 @@ export default function HealthWaterGauge({ healthFactor, avatarSrc }: Props) {
     hf >= 2.0 ? "Low Risk" : hf >= 1.2 ? "Mid Risk" : "High Risk";
 
   return (
-    <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+    <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
       {/* Visual card */}
       <div className="relative aspect-square rounded-2xl overflow-hidden bg-[#0e1f29] border border-white/10">
         {/* Optional avatar below the mask */}
