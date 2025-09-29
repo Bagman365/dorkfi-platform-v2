@@ -17,13 +17,35 @@ export default function RiskBarVertical({
     <TooltipProvider>
       <div className={`flex items-center gap-4 ${className}`}>
         {/* Vertical bar with marker */}
-        <div className="relative w-6 h-full rounded-full bg-white/10" aria-label={`Risk scale, marker at ${Math.round(bottomPct)}%`}>
-          <div className="absolute inset-0 rounded-full bg-gradient-to-b from-rose-500 via-yellow-300 to-teal-400 opacity-80" />
-          <div
-            className="absolute left-1/2 -translate-x-1/2 w-4 h-4 rounded-full ring-2 ring-white/60 bg-white shadow-lg transition-all duration-500"
-            style={{ bottom: `${bottomPct}%` }}
-          />
-        </div>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <div className="relative w-6 h-full rounded-full bg-white/10 cursor-help" aria-label={`Risk scale, marker at ${Math.round(bottomPct)}%`}>
+              <div className="absolute inset-0 rounded-full bg-gradient-to-b from-rose-500 via-yellow-300 to-teal-400 opacity-80" />
+              
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <div
+                    className="absolute left-1/2 -translate-x-1/2 w-4 h-4 rounded-full ring-2 ring-white/60 bg-white shadow-lg transition-all duration-500 cursor-help z-10"
+                    style={{ bottom: `${bottomPct}%` }}
+                  />
+                </TooltipTrigger>
+                <TooltipContent side="left" className="max-w-xs">
+                  <p className="font-semibold mb-1">Current Position</p>
+                  <p>Health Factor: {hf.toFixed(2)}</p>
+                  <p className="text-xs mt-1 text-muted-foreground">
+                    {hf >= 2.0 ? "Safe zone - well collateralized" : 
+                     hf >= 1.2 ? "Moderate risk - monitor closely" : 
+                     "High risk - add collateral soon"}
+                  </p>
+                </TooltipContent>
+              </Tooltip>
+            </div>
+          </TooltipTrigger>
+          <TooltipContent side="left" className="max-w-xs">
+            <p className="font-semibold mb-1">Risk Gradient</p>
+            <p>The color gradient shows risk levels from high (red at top) to low (teal at bottom). The white dot indicates your current health factor position.</p>
+          </TooltipContent>
+        </Tooltip>
 
         {/* Labels in flex column */}
         <div className="flex flex-col justify-between h-full py-1 hidden sm:flex">
