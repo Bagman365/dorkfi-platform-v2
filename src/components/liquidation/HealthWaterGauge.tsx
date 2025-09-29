@@ -20,74 +20,80 @@ export default function HealthWaterGauge({ healthFactor, avatarSrc }: Props) {
     hf >= 2.0 ? "Low Risk" : hf >= 1.2 ? "Mid Risk" : "High Risk";
 
   return (
-    <div className="w-full space-y-6">
+    <div className="w-full space-y-4">
       <div className="text-xl font-bold text-slate-800 dark:text-white">Health Factor</div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-      {/* Visual card */}
-      <div className="relative aspect-square rounded-2xl overflow-hidden bg-[#0e1f29] border border-white/10">
-        {/* Optional avatar below the mask */}
-        {avatarSrc && (
+      
+      {/* Fixed-height row to lock bar and avatar alignment */}
+      <div className="flex items-stretch gap-4 h-56 md:h-64">
+        {/* Vertical gauge matches parent height */}
+        <RiskBarVertical hf={hf} className="h-full" />
+
+        {/* Avatar with water overlay also fills height */}
+        <div className="relative h-full w-[260px] md:w-[300px] rounded-2xl overflow-hidden bg-[#0e1f29] border border-white/10">
+          {/* Optional avatar below the mask */}
+          {avatarSrc && (
+            <img
+              src={avatarSrc}
+              alt="avatar"
+              className="absolute inset-0 w-full h-full object-cover opacity-95"
+            />
+          )}
+
+          {/* Base placeholder image */}
           <img
-            src={avatarSrc}
-            alt="avatar"
-            className="absolute inset-0 w-full h-full object-cover opacity-95"
+            src="/lovable-uploads/dork_health_placeholder_v2.png"
+            alt="Health placeholder"
+            className="absolute inset-0 w-full h-full object-cover"
           />
-        )}
 
-        {/* Base placeholder image */}
-        <img
-          src="/lovable-uploads/dork_health_placeholder_v2.png"
-          alt="Health placeholder"
-          className="absolute inset-0 w-full h-full object-cover"
-        />
-
-        {/* WATER OVERLAY — masked to the placeholder silhouette */}
-        <div
-          className="absolute inset-x-0 bottom-0 transition-all duration-500 ease-out"
-          style={{ height: `${waterPct}%` }}
-        >
+          {/* WATER OVERLAY — masked to the placeholder silhouette */}
           <div
-            className="relative w-full h-full opacity-95"
-            style={{
-              backgroundImage: "url('/lovable-uploads/underwater_full.png')",
-              backgroundSize: "cover",
-              backgroundPosition: "top",
-              WebkitMaskImage: "url('/lovable-uploads/dork_health_placeholder_v2.png')",
-              WebkitMaskRepeat: "no-repeat",
-              WebkitMaskSize: "cover",
-              maskImage: "url('/lovable-uploads/dork_health_placeholder_v2.png')",
-              maskRepeat: "no-repeat",
-              maskSize: "cover",
-              animation: "hf-drift 8s linear infinite",
-            }}
-          />
-          {/* Subtle brand tint over water */}
-          <div className="pointer-events-none absolute inset-0 bg-ocean-teal/25" />
-        </div>
+            className="absolute inset-x-0 bottom-0 transition-all duration-500 ease-out"
+            style={{ height: `${waterPct}%` }}
+          >
+            <div
+              className="relative w-full h-full opacity-95"
+              style={{
+                backgroundImage: "url('/lovable-uploads/underwater_full.png')",
+                backgroundSize: "cover",
+                backgroundPosition: "top",
+                WebkitMaskImage: "url('/lovable-uploads/dork_health_placeholder_v2.png')",
+                WebkitMaskRepeat: "no-repeat",
+                WebkitMaskSize: "cover",
+                maskImage: "url('/lovable-uploads/dork_health_placeholder_v2.png')",
+                maskRepeat: "no-repeat",
+                maskSize: "cover",
+                animation: "hf-drift 8s linear infinite",
+              }}
+            />
+            {/* Subtle brand tint over water */}
+            <div className="pointer-events-none absolute inset-0 bg-ocean-teal/25" />
+          </div>
 
-        {/* Surface line */}
-        <div
-          className="absolute left-0 right-0 h-[2px] bg-white/25 transition-all duration-500"
-          style={{ bottom: `${waterPct}%` }}
-          aria-hidden
-        />
+          {/* Surface line */}
+          <div
+            className="absolute left-0 right-0 h-[2px] bg-white/25 transition-all duration-500"
+            style={{ bottom: `${waterPct}%` }}
+            aria-hidden
+          />
+        </div>
       </div>
 
-      {/* Numbers & copy */}
-      <div className="flex flex-col gap-3">
-        <RiskBarVertical hf={hf} />
-        <div className="text-4xl font-semibold text-foreground">{hf.toFixed(2)}</div>
-        <div
-          className={`text-lg font-medium ${
-            hf >= 2.0 ? "text-ocean-teal" : hf >= 1.2 ? "text-whale-gold" : "text-destructive"
-          }`}
-        >
-          {risk}
+      {/* Metrics block */}
+      <div className="mt-5 space-y-3">
+        <div className="flex items-baseline gap-3">
+          <div className="text-4xl font-semibold text-foreground">{hf.toFixed(2)}</div>
+          <span
+            className={`text-sm font-medium px-2 py-0.5 rounded-full bg-white/5 ${
+              hf >= 2.0 ? "text-ocean-teal" : hf >= 1.2 ? "text-whale-gold" : "text-destructive"
+            }`}
+          >
+            {risk}
+          </span>
         </div>
         <p className="text-sm text-muted-foreground">
-          High risk submerges the avatar. Add collateral or repay to lower the water.
+          Higher water = higher risk. Add collateral or repay to lower the water.
         </p>
-      </div>
       </div>
 
       <style>{`
