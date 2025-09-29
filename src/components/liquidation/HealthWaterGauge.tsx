@@ -108,8 +108,8 @@ export default function HealthWaterGauge({ healthFactor, avatarSrc }: Props) {
         </Badge>
       </div>
 
-      {/* Metrics block aligned with bar */}
-      <div className="mt-5" style={{ marginLeft: `calc(260px + 1rem)` }}>
+      {/* Metrics block aligned with bar - moved higher */}
+      <div className="mt-2" style={{ marginLeft: `calc(260px + 1rem)` }}>
         <div className="md:ml-10">
           <Tooltip>
             <TooltipTrigger asChild>
