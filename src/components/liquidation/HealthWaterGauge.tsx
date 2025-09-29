@@ -29,7 +29,12 @@ export default function HealthWaterGauge({ healthFactor, avatarSrc }: Props) {
     <TooltipProvider>
       <div className="w-full space-y-4">
         <div className="text-xl font-bold text-slate-800 dark:text-white">Health Factor</div>
-      
+        
+        <div className="mb-4">
+          <p className="text-sm text-muted-foreground text-center">
+            Higher water = higher risk. Add collateral or repay to lower the water.
+          </p>
+        </div>
       {/* Fixed-height row to lock bar and avatar alignment */}
       <div className="flex items-stretch gap-4 h-56 md:h-64">
         {/* Avatar with water overlay also fills height */}
@@ -107,11 +112,6 @@ export default function HealthWaterGauge({ healthFactor, avatarSrc }: Props) {
         </div>
       </div>
 
-      <div className="mt-3">
-        <p className="text-sm text-muted-foreground text-center">
-          Higher water = higher risk. Add collateral or repay to lower the water.
-        </p>
-      </div>
 
       <style>{`
         @keyframes hf-drift {
