@@ -19,7 +19,9 @@ export default function HealthWaterGauge({ healthFactor, avatarSrc }: Props) {
     hf >= 2.0 ? "Low Risk" : hf >= 1.2 ? "Mid Risk" : "High Risk";
 
   return (
-    <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+    <div className="w-full space-y-6">
+      <div className="text-xl font-bold text-slate-800 dark:text-white">Health Factor</div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
       {/* Visual card */}
       <div className="relative aspect-square rounded-2xl overflow-hidden bg-[#0e1f29] border border-white/10">
         {/* Optional avatar below the mask */}
@@ -72,7 +74,6 @@ export default function HealthWaterGauge({ healthFactor, avatarSrc }: Props) {
 
       {/* Numbers & copy */}
       <div className="flex flex-col gap-3">
-        <div className="text-sm text-muted-foreground">Health Factor</div>
         <div className="text-4xl font-semibold text-foreground">{hf.toFixed(2)}</div>
         <div
           className={`text-lg font-medium ${
@@ -92,6 +93,7 @@ export default function HealthWaterGauge({ healthFactor, avatarSrc }: Props) {
         <p className="text-sm text-muted-foreground">
           High risk submerges the avatar. Add collateral or repay to lower the water.
         </p>
+      </div>
       </div>
 
       <style>{`
