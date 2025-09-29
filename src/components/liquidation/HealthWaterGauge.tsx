@@ -32,69 +32,74 @@ export default function HealthWaterGauge({ healthFactor, avatarSrc }: Props) {
       
       {/* Fixed-height row to lock bar and avatar alignment */}
       <div className="flex items-stretch gap-4 h-56 md:h-64">
-        <div className="flex flex-col gap-2">
-          {/* Avatar with water overlay */}
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <div className="relative h-full w-[260px] md:w-[300px] rounded-2xl overflow-hidden bg-[#0e1f29] border border-white/10 cursor-help">
-            {/* Optional avatar below the mask */}
-            {avatarSrc && (
-              <img
-                src={avatarSrc}
-                alt="avatar"
-                className="absolute inset-0 w-full h-full object-cover opacity-95"
-              />
-            )}
-
-            {/* Base placeholder image */}
+        {/* Avatar with water overlay also fills height */}
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <div className="relative h-full w-[260px] md:w-[300px] rounded-2xl overflow-hidden bg-[#0e1f29] border border-white/10 cursor-help">
+          {/* Optional avatar below the mask */}
+          {avatarSrc && (
             <img
-              src="/lovable-uploads/dork_health_placeholder_v2.png"
-              alt="Health placeholder"
-              className="absolute inset-0 w-full h-full object-cover"
+              src={avatarSrc}
+              alt="avatar"
+              className="absolute inset-0 w-full h-full object-cover opacity-95"
             />
+          )}
 
-            {/* WATER OVERLAY — masked to the placeholder silhouette */}
+          {/* Base placeholder image */}
+          <img
+            src="/lovable-uploads/dork_health_placeholder_v2.png"
+            alt="Health placeholder"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+
+          {/* WATER OVERLAY — masked to the placeholder silhouette */}
+          <div
+            className="absolute inset-x-0 bottom-0 transition-all duration-500 ease-out"
+            style={{ height: `${waterPct}%` }}
+          >
             <div
-              className="absolute inset-x-0 bottom-0 transition-all duration-500 ease-out"
-              style={{ height: `${waterPct}%` }}
-            >
-              <div
-                className="relative w-full h-full opacity-95"
-                style={{
-                  backgroundImage: "url('/lovable-uploads/underwater_full.png')",
-                  backgroundSize: "cover",
-                  backgroundPosition: "top",
-                  WebkitMaskImage: "url('/lovable-uploads/dork_health_placeholder_v2.png')",
-                  WebkitMaskRepeat: "no-repeat",
-                  WebkitMaskSize: "cover",
-                  maskImage: "url('/lovable-uploads/dork_health_placeholder_v2.png')",
-                  maskRepeat: "no-repeat",
-                  maskSize: "cover",
-                  animation: "hf-drift 8s linear infinite",
-                }}
-              />
-              {/* Subtle brand tint over water */}
-              <div className="pointer-events-none absolute inset-0 bg-ocean-teal/25" />
+              className="relative w-full h-full opacity-95"
+              style={{
+                backgroundImage: "url('/lovable-uploads/underwater_full.png')",
+                backgroundSize: "cover",
+                backgroundPosition: "top",
+                WebkitMaskImage: "url('/lovable-uploads/dork_health_placeholder_v2.png')",
+                WebkitMaskRepeat: "no-repeat",
+                WebkitMaskSize: "cover",
+                maskImage: "url('/lovable-uploads/dork_health_placeholder_v2.png')",
+                maskRepeat: "no-repeat",
+                maskSize: "cover",
+                animation: "hf-drift 8s linear infinite",
+              }}
+            />
+            {/* Subtle brand tint over water */}
+            <div className="pointer-events-none absolute inset-0 bg-ocean-teal/25" />
+          </div>
+
+          {/* Surface line */}
+          <div
+            className="absolute left-0 right-0 h-[2px] bg-white/25 transition-all duration-500"
+            style={{ bottom: `${waterPct}%` }}
+            aria-hidden
+          />
             </div>
+          </TooltipTrigger>
+          <TooltipContent side="top" className="max-w-xs">
+            <p>The water level represents your liquidation risk. Higher water means your position is closer to liquidation.</p>
+          </TooltipContent>
+        </Tooltip>
 
-            {/* Surface line */}
-            <div
-              className="absolute left-0 right-0 h-[2px] bg-white/25 transition-all duration-500"
-              style={{ bottom: `${waterPct}%` }}
-              aria-hidden
-            />
-              </div>
-            </TooltipTrigger>
-            <TooltipContent side="top" className="max-w-xs">
-              <p>The water level represents your liquidation risk. Higher water means your position is closer to liquidation.</p>
-            </TooltipContent>
-          </Tooltip>
-          
-          {/* Risk badge below avatar */}
+        {/* Vertical gauge matches parent height */}
+        <RiskBarVertical hf={hf} className="h-full" />
+      </div>
+
+      {/* Metrics block */}
+      <div className="mt-5 space-y-3">
+        <div className="flex items-baseline justify-center gap-3">
           <Tooltip>
             <TooltipTrigger asChild>
               <span
-                className={`text-sm font-medium px-3 py-1 rounded-full bg-white/5 cursor-help self-center ${
+                className={`text-sm font-medium px-2 py-0.5 rounded-full bg-white/5 cursor-help ${
                   hf >= 2.0 ? "text-ocean-teal" : hf >= 1.2 ? "text-whale-gold" : "text-destructive"
                 }`}
               >
@@ -111,25 +116,18 @@ export default function HealthWaterGauge({ healthFactor, avatarSrc }: Props) {
               </p>
             </TooltipContent>
           </Tooltip>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <div className="text-4xl font-semibold text-foreground cursor-help">{hf.toFixed(2)}</div>
+            </TooltipTrigger>
+            <TooltipContent side="top" className="max-w-xs">
+              <p>Health Factor shows how safe your position is. Below 1.0 means you can be liquidated. Higher is safer.</p>
+            </TooltipContent>
+          </Tooltip>
         </div>
-
-        {/* Vertical gauge matches parent height */}
-        <RiskBarVertical hf={hf} className="h-full" />
-      </div>
-
-      {/* Risk Score at bottom right */}
-      <div className="flex justify-end mt-4">
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <div className="text-right cursor-help">
-              <div className="text-sm text-muted-foreground">Risk Score</div>
-              <div className="text-3xl font-semibold text-foreground">{hf.toFixed(2)}</div>
-            </div>
-          </TooltipTrigger>
-          <TooltipContent side="top" className="max-w-xs">
-            <p>Health Factor shows how safe your position is. Below 1.0 means you can be liquidated. Higher is safer.</p>
-          </TooltipContent>
-        </Tooltip>
+        <p className="text-sm text-muted-foreground">
+          Higher water = higher risk. Add collateral or repay to lower the water.
+        </p>
       </div>
 
       <style>{`
