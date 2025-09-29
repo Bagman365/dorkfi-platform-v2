@@ -98,7 +98,7 @@ export default function HealthWaterGauge({ healthFactor, avatarSrc }: Props) {
         <div className="flex items-baseline justify-center gap-3">
           <Tooltip>
             <TooltipTrigger asChild>
-              <div className="text-4xl font-semibold text-foreground cursor-help">{hf.toFixed(2)}</div>
+              <div className="text-4xl font-semibold text-foreground cursor-help">Risk Score: {hf.toFixed(2)}</div>
             </TooltipTrigger>
             <TooltipContent side="top" className="max-w-xs">
               <p>Health Factor shows how safe your position is. Below 1.0 means you can be liquidated. Higher is safer.</p>
