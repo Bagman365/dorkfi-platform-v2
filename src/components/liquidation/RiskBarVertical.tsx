@@ -15,7 +15,7 @@ export default function RiskBarVertical({
 
   return (
     <TooltipProvider>
-      <div className={`flex items-center gap-4 ${className}`}>
+      <div className={`relative ${className}`}>
         {/* Vertical bar with marker */}
         <Tooltip>
           <TooltipTrigger asChild>
@@ -39,6 +39,43 @@ export default function RiskBarVertical({
                   </p>
                 </TooltipContent>
               </Tooltip>
+              
+              {/* Risk labels positioned ON the bar */}
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <span className="absolute top-[15%] left-1/2 -translate-x-1/2 -translate-y-1/2 text-xs font-bold text-white cursor-help whitespace-nowrap [text-shadow:0_1px_3px_rgba(0,0,0,0.8)]">
+                    High Risk
+                  </span>
+                </TooltipTrigger>
+                <TooltipContent side="right" className="max-w-xs">
+                  <p className="font-semibold mb-1">High Risk Zone</p>
+                  <p>Health Factor below 1.2. Your position is at risk of liquidation. Consider adding collateral or repaying debt.</p>
+                </TooltipContent>
+              </Tooltip>
+
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-xs font-bold text-white cursor-help whitespace-nowrap [text-shadow:0_1px_3px_rgba(0,0,0,0.8)]">
+                    Mid Risk
+                  </span>
+                </TooltipTrigger>
+                <TooltipContent side="right" className="max-w-xs">
+                  <p className="font-semibold mb-1">Moderate Risk Zone</p>
+                  <p>Health Factor between 1.2 and 2.0. Monitor your position and maintain adequate collateral.</p>
+                </TooltipContent>
+              </Tooltip>
+
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <span className="absolute top-[85%] left-1/2 -translate-x-1/2 -translate-y-1/2 text-xs font-bold text-white cursor-help whitespace-nowrap [text-shadow:0_1px_3px_rgba(0,0,0,0.8)]">
+                    Low Risk
+                  </span>
+                </TooltipTrigger>
+                <TooltipContent side="right" className="max-w-xs">
+                  <p className="font-semibold mb-1">Safe Zone</p>
+                  <p>Health Factor above 2.0. Your position is safe with comfortable collateral margin.</p>
+                </TooltipContent>
+              </Tooltip>
             </div>
           </TooltipTrigger>
           <TooltipContent side="left" className="max-w-xs">
@@ -46,45 +83,6 @@ export default function RiskBarVertical({
             <p>The color gradient shows risk levels from high (red at top) to low (teal at bottom). The white dot indicates your current health factor position.</p>
           </TooltipContent>
         </Tooltip>
-
-        {/* Labels in flex column */}
-        <div className="flex flex-col justify-between h-full py-1 hidden sm:flex">
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <span className="text-xl font-bold text-rose-500 cursor-help transition-colors hover:text-rose-400">
-                High Risk
-              </span>
-            </TooltipTrigger>
-            <TooltipContent side="right" className="max-w-xs">
-              <p className="font-semibold mb-1">High Risk Zone</p>
-              <p>Health Factor below 1.2. Your position is at risk of liquidation. Consider adding collateral or repaying debt.</p>
-            </TooltipContent>
-          </Tooltip>
-
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <span className="text-xl font-bold text-yellow-500 cursor-help transition-colors hover:text-yellow-400">
-                Mid Risk
-              </span>
-            </TooltipTrigger>
-            <TooltipContent side="right" className="max-w-xs">
-              <p className="font-semibold mb-1">Moderate Risk Zone</p>
-              <p>Health Factor between 1.2 and 2.0. Monitor your position and maintain adequate collateral.</p>
-            </TooltipContent>
-          </Tooltip>
-
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <span className="text-xl font-bold text-teal-400 cursor-help transition-colors hover:text-teal-300">
-                Low Risk
-              </span>
-            </TooltipTrigger>
-            <TooltipContent side="right" className="max-w-xs">
-              <p className="font-semibold mb-1">Safe Zone</p>
-              <p>Health Factor above 2.0. Your position is safe with comfortable collateral margin.</p>
-            </TooltipContent>
-          </Tooltip>
-        </div>
       </div>
     </TooltipProvider>
   );
