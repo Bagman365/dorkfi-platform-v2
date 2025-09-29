@@ -25,9 +25,6 @@ export default function HealthWaterGauge({ healthFactor, avatarSrc }: Props) {
       
       {/* Fixed-height row to lock bar and avatar alignment */}
       <div className="flex items-stretch gap-4 h-56 md:h-64">
-        {/* Vertical gauge matches parent height */}
-        <RiskBarVertical hf={hf} className="h-full" />
-
         {/* Avatar with water overlay also fills height */}
         <div className="relative h-full w-[260px] md:w-[300px] rounded-2xl overflow-hidden bg-[#0e1f29] border border-white/10">
           {/* Optional avatar below the mask */}
@@ -77,6 +74,9 @@ export default function HealthWaterGauge({ healthFactor, avatarSrc }: Props) {
             aria-hidden
           />
         </div>
+
+        {/* Vertical gauge matches parent height */}
+        <RiskBarVertical hf={hf} className="h-full" />
       </div>
 
       {/* Metrics block */}
