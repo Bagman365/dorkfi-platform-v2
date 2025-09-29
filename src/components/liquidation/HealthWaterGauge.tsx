@@ -93,8 +93,8 @@ export default function HealthWaterGauge({ healthFactor, avatarSrc }: Props) {
         <RiskBarVertical hf={hf} className="h-full" />
       </div>
 
-      {/* Metrics block */}
-      <div className="mt-5 flex justify-end">
+      {/* Metrics block aligned with bar */}
+      <div className="mt-5 flex justify-end pr-0">
         <Tooltip>
           <TooltipTrigger asChild>
             <div className="text-lg font-semibold text-foreground cursor-help">Risk Score: {hf.toFixed(2)}</div>
