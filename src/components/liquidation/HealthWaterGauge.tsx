@@ -94,16 +94,6 @@ export default function HealthWaterGauge({ healthFactor, avatarSrc }: Props) {
         </Tooltip>
       </div>
 
-      {/* Dynamic Risk Badge centered under the image */}
-      <div className="flex justify-center" style={{ width: '260px' }}>
-        <Badge 
-          variant={hf <= 1.0 ? 'destructive' : hf <= 1.2 ? 'secondary' : 'outline'}
-          className={`${riskLevel.color} ${riskLevel.bg} border-current text-base px-4 py-2 font-bold`}
-        >
-          {riskLevel.label}
-        </Badge>
-      </div>
-
 
       <style>{`
         @keyframes hf-drift {
