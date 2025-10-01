@@ -30,7 +30,7 @@ export default function HealthWaterGauge({ healthFactor, avatarSrc }: Props) {
       <div className="text-xl font-bold text-slate-800 dark:text-white">Health Factor</div>
         
       {/* Fixed-height row to lock bar and avatar alignment */}
-      <div className="flex items-stretch gap-4 h-56 md:h-64">
+      <div className="flex items-start gap-6 h-56 md:h-64">
         {/* Avatar with water overlay also fills height */}
         <Tooltip>
           <TooltipTrigger asChild>
@@ -87,6 +87,20 @@ export default function HealthWaterGauge({ healthFactor, avatarSrc }: Props) {
             <p>The water level represents your liquidation risk. Higher water means your position is closer to liquidation.</p>
           </TooltipContent>
         </Tooltip>
+
+        {/* Risk Badge and Score */}
+        <div className="flex flex-col items-center gap-3 pt-8">
+          <Badge 
+            variant={hf <= 1.0 ? 'destructive' : hf <= 1.2 ? 'secondary' : 'outline'}
+            className={`${riskLevel.color} ${riskLevel.bg} border-current text-lg px-6 py-2 font-bold`}
+          >
+            {riskLevel.label}
+          </Badge>
+          <div className="text-center">
+            <div className="text-sm text-muted-foreground mb-1">Risk Score</div>
+            <div className="text-2xl font-bold text-slate-800 dark:text-white">{hf.toFixed(2)}</div>
+          </div>
+        </div>
       </div>
 
       <div className="mt-4">
