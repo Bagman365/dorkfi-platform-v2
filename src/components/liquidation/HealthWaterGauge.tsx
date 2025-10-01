@@ -89,7 +89,7 @@ export default function HealthWaterGauge({ healthFactor, avatarSrc }: Props) {
           />
             </div>
           </TooltipTrigger>
-          <TooltipContent side="top" className="max-w-xs">
+          <TooltipContent side="right" className="max-w-xs">
             <p>The water level represents your liquidation risk. Higher water means your position is closer to liquidation.</p>
           </TooltipContent>
         </Tooltip>
@@ -102,7 +102,7 @@ export default function HealthWaterGauge({ healthFactor, avatarSrc }: Props) {
               <TooltipTrigger asChild>
                 <div className="text-lg font-semibold text-foreground cursor-help">Risk Score: {hf.toFixed(2)}</div>
               </TooltipTrigger>
-              <TooltipContent side="top" className="max-w-xs">
+              <TooltipContent side="right" className="max-w-xs">
                 <p>Health Factor shows how safe your position is. Below 1.0 means you can be liquidated. Higher is safer.</p>
               </TooltipContent>
             </Tooltip>
