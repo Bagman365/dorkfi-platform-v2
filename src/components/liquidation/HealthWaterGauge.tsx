@@ -129,14 +129,6 @@ export default function HealthWaterGauge({ healthFactor, avatarSrc }: Props) {
         </Tooltip>
       </div>
 
-      {/* Contextual guidance */}
-      <div className="mt-6 p-4 rounded-lg bg-gradient-to-r from-ocean-teal/10 to-sky-blue/10 border border-ocean-teal/20">
-        <p className="text-sm font-medium text-slate-700 dark:text-slate-300">
-          💡 <span className="font-semibold">Quick Tip:</span> Higher water = higher risk. Add collateral or repay debt to lower the water level.
-        </p>
-      </div>
-
-
       <style>{`
         @keyframes hf-drift {
           from { background-position-x: 0; }
