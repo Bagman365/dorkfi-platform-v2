@@ -32,8 +32,17 @@ const EnhancedHealthFactor = ({
       <Card className="bg-gradient-to-br from-blue-50 via-cyan-50 to-sky-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 border-2 border-gray-200/50 dark:border-ocean-teal/30 overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 hover:border-ocean-teal/50">
         <CardContent className="p-8">
           {/* Enhanced Layout */}
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr,400px] gap-10">
-            {/* Left Side - Stats Panel & CTAs */}
+          <div className="grid grid-cols-1 lg:grid-cols-[400px,1fr] gap-10">
+            {/* Left Side - Enhanced Health Gauge */}
+            <div className="lg:border-r-2 lg:border-ocean-teal/20 lg:pr-10">
+              <UnderwaterScene 
+                healthFactor={healthFactor}
+                dorkNftImage={dorkNftImage}
+                underwaterBg={underwaterBg}
+              />
+            </div>
+
+            {/* Right Side - Stats Panel & CTAs */}
             <div className="space-y-6">
               {/* Header */}
               <div className="flex items-center justify-between pb-4 border-b-2 border-ocean-teal/20">
@@ -57,15 +66,6 @@ const EnhancedHealthFactor = ({
                 healthFactor={healthFactor}
                 onAddCollateral={onAddCollateral}
                 onBuyVoi={onBuyVoi}
-              />
-            </div>
-
-            {/* Right Side - Enhanced Health Gauge */}
-            <div className="lg:border-l-2 lg:border-ocean-teal/20 lg:pl-10">
-              <UnderwaterScene 
-                healthFactor={healthFactor}
-                dorkNftImage={dorkNftImage}
-                underwaterBg={underwaterBg}
               />
             </div>
           </div>
