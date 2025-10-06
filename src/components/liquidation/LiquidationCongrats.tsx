@@ -7,6 +7,7 @@ import { LiquidationAccount } from '@/hooks/useLiquidationData';
 import { LiquidationParams } from './EnhancedAccountDetailModal';
 import { shortenAddress } from '@/utils/liquidationUtils';
 import { toast } from "@/hooks/use-toast";
+import { getTokenImagePath } from '@/utils/tokenImageUtils';
 
 interface LiquidationCongratsProps {
   account: LiquidationAccount;
@@ -81,10 +82,12 @@ const LiquidationCongrats: React.FC<LiquidationCongratsProps> = ({
         <Sparkles className="absolute -top-3 -left-3 text-whale-gold w-7 h-7 animate-bounce" />
         <Sparkles className="absolute -top-3 -right-3 text-highlight-aqua w-7 h-7 animate-bounce animation-delay-300" />
         <CheckCircle2 className="w-16 h-16 text-green-500 drop-shadow-xl bg-white dark:bg-slate-800 rounded-full p-1 border-4 border-whale-gold z-10" />
-        <div className="mt-[-30px] w-32 h-32 rounded-xl shadow-md border-4 border-whale-gold mx-auto bg-gradient-to-br from-red-100 to-red-200 dark:from-red-900 dark:to-red-800 flex items-center justify-center">
-          <div className="text-red-600 dark:text-red-300 font-bold text-lg">
-            {liquidationParams.collateralToken}
-          </div>
+        <div className="mt-[-30px] w-32 h-32 rounded-xl shadow-md border-4 border-whale-gold mx-auto bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-900 flex items-center justify-center overflow-hidden">
+          <img 
+            src={getTokenImagePath(liquidationParams.collateralToken)} 
+            alt={liquidationParams.collateralToken}
+            className="w-20 h-20 object-contain"
+          />
         </div>
       </div>
       
