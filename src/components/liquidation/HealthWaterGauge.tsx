@@ -26,10 +26,10 @@ export default function HealthWaterGauge({ healthFactor, avatarSrc }: Props) {
 
   // Threshold markers for risk levels
   const thresholds = useMemo(() => [
-    { hf: 3.0, label: "Safe", color: "bg-green-500/60" },
-    { hf: 1.5, label: "Moderate", color: "bg-yellow-500/60" },
-    { hf: 1.2, label: "Caution", color: "bg-orange-500/60" },
     { hf: 1.0, label: "Critical", color: "bg-red-500/60" },
+    { hf: 1.2, label: "Caution", color: "bg-orange-500/60" },
+    { hf: 1.5, label: "Moderate", color: "bg-yellow-500/60" },
+    { hf: 3.0, label: "Safe", color: "bg-green-500/60" },
   ], []);
 
   const getThresholdPosition = (thresholdHf: number) => {
