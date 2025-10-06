@@ -24,7 +24,7 @@ const KPIGrid = () => {
           <TooltipTrigger asChild>
             <div>
               <KPICard
-                title="TVL"
+                title="Total Value Locked"
                 value={formatCurrency(kpiData.tvl)}
                 change={5.4}
                 icon="📊"
