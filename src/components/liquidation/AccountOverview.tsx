@@ -22,35 +22,35 @@ export default function AccountOverview({ account, onInitiateLiquidation }: Acco
   const isHighRisk = account.healthFactor <= 1.1;
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-5">
       {/* Account Header */}
-      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 p-4 rounded-xl bg-card border border-border">
-        <div>
-          <p className="text-sm text-muted-foreground mb-1">Account Address</p>
-          <p className="font-mono text-lg font-semibold text-foreground">
-            {shortenAddress(account.walletAddress, 8)}
-          </p>
-        </div>
-        
-        <div className="flex flex-col md:flex-row gap-3">
-          <div className="text-center md:text-right">
-            <p className="text-sm text-muted-foreground mb-1">Health Factor</p>
-            <p className={`text-2xl font-bold ${riskColor}`}>
-              {account.healthFactor.toFixed(3)}
+      <div className="flex flex-col gap-4 p-5 rounded-lg bg-white/80 dark:bg-slate-800 border border-gray-200 dark:border-slate-700">
+        <div className="flex items-center justify-between">
+          <div>
+            <p className="text-sm font-medium text-slate-600 dark:text-slate-300 mb-1">Account Address</p>
+            <p className="font-mono text-base font-semibold text-slate-800 dark:text-white">
+              {shortenAddress(account.walletAddress, 8)}
             </p>
           </div>
           
-          {(isLiquidatable || isHighRisk) && (
-            <DorkFiButton
-              variant={isLiquidatable ? "danger-outline" : "high"}
-              onClick={onInitiateLiquidation}
-              className="flex items-center gap-2 px-4 py-2 hover:scale-105 transition-all"
-            >
-              {isLiquidatable ? <Zap className="w-4 h-4" /> : <AlertTriangle className="w-4 h-4" />}
-              {isLiquidatable ? "Liquidate Now" : "Monitor Position"}
-            </DorkFiButton>
-          )}
+          <div className="text-right">
+            <p className="text-sm font-medium text-slate-600 dark:text-slate-300 mb-1">Health Factor</p>
+            <p className={`text-xl font-bold ${riskColor}`}>
+              {account.healthFactor.toFixed(3)}
+            </p>
+          </div>
         </div>
+        
+        {(isLiquidatable || isHighRisk) && (
+          <DorkFiButton
+            variant={isLiquidatable ? "danger-outline" : "high"}
+            onClick={onInitiateLiquidation}
+            className="flex items-center justify-center gap-2 w-full h-12"
+          >
+            {isLiquidatable ? <Zap className="w-4 h-4" /> : <AlertTriangle className="w-4 h-4" />}
+            {isLiquidatable ? "Liquidate Now" : "Monitor Position"}
+          </DorkFiButton>
+        )}
       </div>
 
       {/* Health Factor Gauge */}
@@ -60,7 +60,7 @@ export default function AccountOverview({ account, onInitiateLiquidation }: Acco
       <PositionSummary account={account} />
 
       {/* Asset Lists */}
-      <div className="grid gap-6 md:grid-cols-2">
+      <div className="grid gap-5 md:grid-cols-2">
         <AssetList 
           title="Collateral Assets" 
           assets={account.collateralAssets} 
@@ -77,13 +77,13 @@ export default function AccountOverview({ account, onInitiateLiquidation }: Acco
       {isLiquidatable && (
         <Alert 
           variant="destructive" 
-          className="border-2 border-destructive/50 bg-destructive/20 shadow-lg shadow-destructive/10 animate-pulse relative overflow-hidden before:absolute before:left-0 before:top-0 before:h-full before:w-1 before:bg-destructive"
+          className="border border-destructive/50 bg-destructive/10"
         >
-          <AlertTriangle className="h-5 w-5 animate-bounce" />
-          <AlertTitle className="text-lg font-bold text-destructive">
+          <AlertTriangle className="h-4 w-4" />
+          <AlertTitle className="text-base font-semibold">
             Critical Risk Warning
           </AlertTitle>
-          <AlertDescription className="text-foreground font-medium">
+          <AlertDescription className="text-sm">
             This position can be liquidated immediately. The health factor is below 1.0, making it eligible for liquidation by any user.
             Liquidators can claim up to 50% of the collateral with a 5% bonus.
           </AlertDescription>

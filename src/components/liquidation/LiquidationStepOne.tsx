@@ -81,140 +81,74 @@ export default function LiquidationStepOne({ account, onComplete, onCancel }: Li
   );
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-5">
       {/* Collateral Selection */}
-      <Card className="bg-white/50 dark:bg-slate-800 border-gray-200 dark:border-slate-700">
-        <CardHeader className="p-4 pb-2">
-          <div className="flex items-center gap-2">
-            <CardTitle className="text-base md:text-lg text-slate-800 dark:text-white flex items-center gap-2">
-              <Calculator className="h-4 w-4" />
-              Select Collateral Asset
-            </CardTitle>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Info className="h-4 w-4 text-muted-foreground cursor-help" />
-              </TooltipTrigger>
-              <TooltipContent side="top">
-                Choose which collateral will be seized to cover the debt. You'll receive a liquidation bonus.
-              </TooltipContent>
-            </Tooltip>
-          </div>
-        </CardHeader>
-        <CardContent className="p-4 pt-0 space-y-3">
-          <div>
-            <div className="flex items-center gap-2">
-              <Label htmlFor="collateral-select" className="text-slate-600 dark:text-slate-300">
-                Available Collateral Assets
-              </Label>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Info className="h-3.5 w-3.5 text-muted-foreground cursor-help" />
-                </TooltipTrigger>
-                <TooltipContent side="top">
-                  Only assets with sufficient value are shown.
-                </TooltipContent>
-              </Tooltip>
-            </div>
-            <Select value={selectedCollateral} onValueChange={setSelectedCollateral}>
-              <SelectTrigger className="bg-background border border-border text-foreground">
-                <SelectValue placeholder="Choose collateral asset" />
-              </SelectTrigger>
-              <SelectContent className="bg-popover text-popover-foreground border border-border z-50">
-                {account.collateralAssets.map((asset) => (
-                  <SelectItem key={asset.symbol} value={asset.symbol} className="text-slate-800 dark:text-white">
-                    {asset.symbol} - {asset.amount.toLocaleString()} (${asset.valueUSD.toLocaleString()})
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-        </CardContent>
-      </Card>
+      <div className="space-y-3">
+        <Label htmlFor="collateral-select" className="text-sm font-medium text-slate-600 dark:text-slate-300">
+          Collateral Asset
+        </Label>
+        <Select value={selectedCollateral} onValueChange={setSelectedCollateral}>
+          <SelectTrigger className="bg-white/80 dark:bg-slate-800 border-gray-300 dark:border-slate-600 text-slate-800 dark:text-white h-12">
+            <SelectValue placeholder="Choose collateral asset" />
+          </SelectTrigger>
+          <SelectContent className="bg-white dark:bg-slate-800 border-gray-300 dark:border-slate-600 z-50">
+            {account.collateralAssets.map((asset) => (
+              <SelectItem key={asset.symbol} value={asset.symbol}>
+                {asset.symbol} - {asset.amount.toLocaleString()} (${asset.valueUSD.toLocaleString()})
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+        <p className="text-xs text-slate-400 dark:text-slate-500">
+          Choose which collateral will be seized to cover the debt
+        </p>
+      </div>
 
       {/* Repayment Amount */}
-      <Card className="bg-white/50 dark:bg-slate-800 border-gray-200 dark:border-slate-700">
-        <CardHeader className="p-4 pb-2">
-          <div className="flex items-center gap-2">
-            <CardTitle className="text-base md:text-lg text-slate-800 dark:text-white flex items-center gap-2">
-              <DollarSign className="h-4 w-4" />
-              Debt Repayment Amount
-            </CardTitle>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Info className="h-4 w-4 text-muted-foreground cursor-help" />
-              </TooltipTrigger>
-              <TooltipContent side="top">
-                Enter the amount of debt you'll repay in USD. The protocol will take collateral equal to the repay amount plus the liquidation bonus.
-              </TooltipContent>
-            </Tooltip>
-          </div>
-        </CardHeader>
-        <CardContent className="p-4 pt-0 space-y-3">
-          <div>
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <Label htmlFor="repay-amount" className="text-slate-600 dark:text-slate-300">
-                  Amount to Repay (USD)
-                </Label>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Info className="h-3.5 w-3.5 text-muted-foreground cursor-help" />
-                  </TooltipTrigger>
-                  <TooltipContent side="top">
-                    Max is the lesser of 50% of current debt or the selected collateral's value.
-                  </TooltipContent>
-                </Tooltip>
-              </div>
-              <Tooltip>
-                <TooltipTrigger className="text-xs text-muted-foreground">
-                  Max repayable: ${maxRepayAmount.toLocaleString()}
-                </TooltipTrigger>
-                <TooltipContent side="top">
-                  Calculated as min(50% of total debt, selected collateral value).
-                </TooltipContent>
-              </Tooltip>
-            </div>
-            <Input
-              id="repay-amount"
-              type="number"
-              placeholder="0.00"
-              value={repayAmountUSD}
-              onChange={(e) => setRepayAmountUSD(e.target.value)}
-              className="bg-white/80 dark:bg-slate-700 border-gray-200 dark:border-slate-600 text-slate-800 dark:text-white"
-              max={maxRepayAmount}
-            />
-          </div>
-        </CardContent>
-      </Card>
+      <div className="space-y-3">
+        <Label htmlFor="repay-amount" className="text-sm font-medium text-slate-600 dark:text-slate-300">
+          Repayment Amount (USD)
+        </Label>
+        <Input
+          id="repay-amount"
+          type="number"
+          inputMode="decimal"
+          placeholder="0.00"
+          value={repayAmountUSD}
+          onChange={(e) => setRepayAmountUSD(e.target.value)}
+          className="bg-white/80 dark:bg-slate-800 border-gray-300 dark:border-slate-600 text-slate-800 dark:text-white h-12 text-lg"
+          max={maxRepayAmount}
+        />
+        <p className="text-xs text-slate-400 dark:text-slate-500">
+          Max repayable: ${maxRepayAmount.toLocaleString()} (50% of debt or collateral value)
+        </p>
+      </div>
 
       {/* Calculations */}
       {calculations && (
-        <Card className="bg-white/50 dark:bg-slate-800 border-gray-200 dark:border-slate-700">
-          <CardHeader className="p-4 pb-2">
-            <CardTitle className="text-base md:text-lg text-whale-gold">Liquidation Preview</CardTitle>
-          </CardHeader>
-          <CardContent className="p-4 pt-0 space-y-3">
+        <Card className="bg-white/80 dark:bg-slate-800 border-gray-200 dark:border-slate-700">
+          <CardContent className="p-4 space-y-3">
             <div className="flex justify-between items-center">
-              <span className="text-slate-600 dark:text-slate-300">Collateral Price:</span>
-              <span className="text-slate-800 dark:text-white font-semibold">
+              <span className="text-sm text-slate-500 dark:text-slate-400">Collateral Price</span>
+              <span className="text-sm font-medium text-slate-800 dark:text-white">
                 ${calculations.collateralPrice.toLocaleString()}
               </span>
             </div>
             <div className="flex justify-between items-center">
-              <span className="text-slate-600 dark:text-slate-300">Liquidation Bonus (5%):</span>
-              <span className="text-ocean-teal font-semibold">
+              <span className="text-sm text-slate-500 dark:text-slate-400">Liquidation Bonus (5%)</span>
+              <span className="text-sm font-medium text-teal-600 dark:text-teal-400">
                 ${calculations.liquidationBonus.toLocaleString()}
               </span>
             </div>
             <div className="flex justify-between items-center">
-              <span className="text-slate-600 dark:text-slate-300">Collateral Needed:</span>
-              <span className="text-slate-800 dark:text-white font-semibold">
+              <span className="text-sm text-slate-500 dark:text-slate-400">Collateral to Receive</span>
+              <span className="text-sm font-medium text-slate-800 dark:text-white">
                 {calculations.collateralNeeded.toFixed(4)} {selectedCollateral}
               </span>
             </div>
             <div className="flex justify-between items-center">
-              <span className="text-slate-600 dark:text-slate-300">New LTV After Liquidation:</span>
-              <span className="text-whale-gold font-semibold">
+              <span className="text-sm text-slate-500 dark:text-slate-400">New LTV</span>
+              <span className="text-sm font-medium text-slate-800 dark:text-white">
                 {(calculations.newLTV * 100).toFixed(1)}%
               </span>
             </div>
@@ -223,20 +157,20 @@ export default function LiquidationStepOne({ account, onComplete, onCancel }: Li
       )}
 
       {/* Action Buttons */}
-      <div className="flex gap-3 justify-end">
+      <div className="flex gap-3 pt-2">
         <DorkFiButton
           variant="secondary"
           onClick={onCancel}
-          className="min-h-[40px] min-w-[92px] font-semibold text-sm"
+          className="h-12 flex-1 font-semibold"
         >
           Cancel
         </DorkFiButton>
         <DorkFiButton
           onClick={handleContinue}
           disabled={!selectedCollateral || !repayAmountUSD || !calculations}
-          className="min-h-[40px] min-w-[140px] font-semibold text-sm"
+          className="h-12 flex-1 font-semibold"
         >
-          Continue to Confirmation
+          Continue
         </DorkFiButton>
       </div>
     </div>
