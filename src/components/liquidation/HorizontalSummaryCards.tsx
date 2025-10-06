@@ -70,7 +70,7 @@ export default function HorizontalSummaryCards({
                   <div className={`p-2 rounded-xl ${metric.color} border`}>
                     <Icon className={`h-5 w-5 ${metric.iconColor}`} />
                   </div>
-                  <div className="space-y-1">
+                  <div className="space-y-1 text-center">
                     <p className="text-sm font-medium text-muted-foreground">
                       {metric.title}
                     </p>
