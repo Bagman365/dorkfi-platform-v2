@@ -120,6 +120,33 @@ const LiquidationCongrats: React.FC<LiquidationCongratsProps> = ({
         </div>
       </div>
       
+      <div className="flex flex-col gap-2 w-full mt-2">
+        <DorkFiButton
+          variant="primary"
+          className="w-full bg-ocean-teal hover:bg-ocean-teal/90 text-white rounded-xl py-3 text-lg"
+          onClick={onViewTransaction}
+        >
+          Liquidate Another Position
+        </DorkFiButton>
+        
+        <DorkFiButton
+          variant="secondary"
+          className="w-full border-ocean-teal text-ocean-teal dark:border-whale-gold dark:text-whale-gold"
+          onClick={onReturnToMarkets}
+        >
+          Return to Liquidation Markets
+        </DorkFiButton>
+        
+        <DorkFiButton
+          variant="secondary"
+          className="w-full border-ocean-teal text-ocean-teal dark:border-whale-gold dark:text-whale-gold flex items-center justify-center gap-2"
+          onClick={() => navigate('/')}
+        >
+          <Wallet className="w-4 h-4" />
+          View Portfolio
+        </DorkFiButton>
+      </div>
+      
       {/* Share Section */}
       <div className="w-full mt-3 mb-2">
         <h3 className="text-sm font-semibold text-center text-slate-300 mb-3">Share Your Success</h3>
@@ -151,33 +178,6 @@ const LiquidationCongrats: React.FC<LiquidationCongratsProps> = ({
             </button>
           )}
         </div>
-      </div>
-      
-      <div className="flex flex-col gap-2 w-full mt-2">
-        <DorkFiButton
-          variant="primary"
-          className="w-full bg-ocean-teal hover:bg-ocean-teal/90 text-white rounded-xl py-3 text-lg"
-          onClick={onViewTransaction}
-        >
-          Liquidate Another Position
-        </DorkFiButton>
-        
-        <DorkFiButton
-          variant="secondary"
-          className="w-full border-ocean-teal text-ocean-teal dark:border-whale-gold dark:text-whale-gold"
-          onClick={onReturnToMarkets}
-        >
-          Return to Liquidation Markets
-        </DorkFiButton>
-        
-        <DorkFiButton
-          variant="secondary"
-          className="w-full border-ocean-teal text-ocean-teal dark:border-whale-gold dark:text-whale-gold flex items-center justify-center gap-2"
-          onClick={() => navigate('/')}
-        >
-          <Wallet className="w-4 h-4" />
-          View Portfolio
-        </DorkFiButton>
       </div>
       
       <button
