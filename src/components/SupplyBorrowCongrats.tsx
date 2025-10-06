@@ -126,18 +126,18 @@ const SupplyBorrowCongrats: React.FC<SupplyBorrowCongratsProps> = ({
         <div className="flex gap-2 justify-center">
           <button
             onClick={handleTwitterShare}
-            className="flex items-center justify-center w-10 h-10 hover:scale-110 transition-transform"
+            className="flex items-center justify-center w-12 h-12 hover:scale-110 transition-transform"
             title="Share on X"
           >
-            <img src="/lovable-uploads/x_round_icon.png" alt="X" className="w-10 h-10" />
+            <img src="/lovable-uploads/x_round_icon.png" alt="X" className="block w-12 h-12" />
           </button>
           
           <button
             onClick={handleFarcasterShare}
-            className="flex items-center justify-center w-10 h-10 hover:scale-110 transition-transform"
+            className="flex items-center justify-center w-12 h-12 hover:scale-110 transition-transform"
             title="Share on Farcaster"
           >
-            <img src="/lovable-uploads/farcaster_icon.png" alt="Farcaster" className="w-10 h-10" />
+            <img src="/lovable-uploads/farcaster_icon.png" alt="Farcaster" className="block w-12 h-12" />
           </button>
           
           <button
