@@ -1,6 +1,6 @@
 
 import React from "react";
-import { CheckCircle2, Sparkles, Trophy, Twitter, Linkedin, Link2, Share2 } from "lucide-react";
+import { CheckCircle2, Sparkles, Trophy, Twitter, Link2, Share2 } from "lucide-react";
 import DorkFiButton from "@/components/ui/DorkFiButton";
 import { LiquidationAccount } from '@/hooks/useLiquidationData';
 import { LiquidationParams } from './EnhancedAccountDetailModal';
@@ -40,10 +40,6 @@ const LiquidationCongrats: React.FC<LiquidationCongratsProps> = ({
     window.open(url, '_blank', 'width=550,height=420');
   };
 
-  const handleLinkedInShare = () => {
-    const url = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(generateShareUrl())}`;
-    window.open(url, '_blank', 'width=550,height=420');
-  };
 
   const handleCopyLink = async () => {
     try {
@@ -133,16 +129,6 @@ const LiquidationCongrats: React.FC<LiquidationCongratsProps> = ({
             <Twitter className="w-4 h-4" />
             <span className="text-sm">Twitter</span>
           </button>
-          
-          <button
-            onClick={handleLinkedInShare}
-            className="flex items-center justify-center gap-2 px-4 py-2 bg-[#0077B5] hover:bg-[#006399] text-white rounded-lg transition-colors"
-            title="Share on LinkedIn"
-          >
-            <Linkedin className="w-4 h-4" />
-            <span className="text-sm">LinkedIn</span>
-          </button>
-          
           <button
             onClick={handleCopyLink}
             className="flex items-center justify-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors"
