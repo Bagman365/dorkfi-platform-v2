@@ -75,7 +75,7 @@ const LiquidationCongrats: React.FC<LiquidationCongratsProps> = ({
           className="w-full bg-ocean-teal hover:bg-ocean-teal/90 text-white rounded-xl py-3 text-lg"
           onClick={onViewTransaction}
         >
-          View Transaction
+          Liquidate Another Position
         </DorkFiButton>
         
         <DorkFiButton
