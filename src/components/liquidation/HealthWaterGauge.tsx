@@ -33,7 +33,7 @@ export default function HealthWaterGauge({ healthFactor, avatarSrc }: Props) {
   ], []);
 
   const getThresholdPosition = (thresholdHf: number) => {
-    const t = (3.0 - thresholdHf) / (3.0 - 0.8);
+    const t = (thresholdHf - 0.8) / (3.0 - 0.8);
     return Math.round(10 + t * 82);
   };
 
