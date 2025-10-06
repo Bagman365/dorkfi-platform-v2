@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent } from "@/components/ui/card";
 import { InfoIcon } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import SupplyBorrowCongrats from "./SupplyBorrowCongrats";
 
 interface DepositModalProps {
@@ -26,6 +27,7 @@ const DepositModal = ({ isOpen, onClose, tokenSymbol, tokenIcon, userBalance, ma
   const [amount, setAmount] = useState("");
   const [fiatValue, setFiatValue] = useState(0);
   const [showSuccess, setShowSuccess] = useState(false);
+  const [collateralType, setCollateralType] = useState<string>("standard");
 
   // Reset states when modal opens/closes
   useEffect(() => {
@@ -33,6 +35,7 @@ const DepositModal = ({ isOpen, onClose, tokenSymbol, tokenIcon, userBalance, ma
       setShowSuccess(false);
       setAmount("");
       setFiatValue(0);
+      setCollateralType("standard");
     }
   }, [isOpen]);
 
@@ -50,7 +53,7 @@ const DepositModal = ({ isOpen, onClose, tokenSymbol, tokenIcon, userBalance, ma
   };
 
   const handleSubmit = () => {
-    console.log(`Deposit ${amount} ${tokenSymbol}`);
+    console.log(`Deposit ${amount} ${tokenSymbol} as ${collateralType} collateral`);
     
     setTimeout(() => {
       setShowSuccess(true);
@@ -70,6 +73,7 @@ const DepositModal = ({ isOpen, onClose, tokenSymbol, tokenIcon, userBalance, ma
     setShowSuccess(false);
     setAmount("");
     setFiatValue(0);
+    setCollateralType("standard");
   };
 
   const isValidAmount = amount && parseFloat(amount) > 0 && parseFloat(amount) <= userBalance;
@@ -110,6 +114,26 @@ const DepositModal = ({ isOpen, onClose, tokenSymbol, tokenIcon, userBalance, ma
               </DialogHeader>
               
               <div className="space-y-6 pt-2 px-8 pb-8">
+                <div className="space-y-3">
+                  <Label htmlFor="collateral-type" className="text-sm font-medium text-slate-600 dark:text-slate-300">
+                    Collateral Type
+                  </Label>
+                  <Select value={collateralType} onValueChange={setCollateralType}>
+                    <SelectTrigger className="bg-white/80 dark:bg-slate-800 border-gray-300 dark:border-slate-600 text-slate-800 dark:text-white h-12">
+                      <SelectValue placeholder="Select collateral type" />
+                    </SelectTrigger>
+                    <SelectContent className="bg-white dark:bg-slate-800 border-gray-300 dark:border-slate-600 z-50">
+                      <SelectItem value="standard">Standard Collateral</SelectItem>
+                      <SelectItem value="high-ltv">High LTV Collateral</SelectItem>
+                      <SelectItem value="stable">Stable Collateral</SelectItem>
+                      <SelectItem value="volatile">Volatile Collateral</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <p className="text-xs text-slate-400 dark:text-slate-500">
+                    Different collateral types have different borrowing power and liquidation thresholds
+                  </p>
+                </div>
+
                 <div className="space-y-3">
                   <Label htmlFor="amount" className="text-sm font-medium text-slate-600 dark:text-slate-300">
                     Amount
