@@ -1,6 +1,8 @@
 
 import { useLocation } from "react-router-dom";
+import { useState } from "react";
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import Dashboard from "@/components/Dashboard";
 import MarketsTable from "@/components/MarketsTable";
 import Portfolio from "@/components/Portfolio";
@@ -8,7 +10,6 @@ import SwapWidget from "@/components/SwapWidget";
 import SwapHeroSection from "@/components/SwapHeroSection";
 import CandlestickChart from "@/components/CandlestickChart";
 import CanvasBubbles from "@/components/CanvasBubbles";
-import { useState } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 interface Token {
@@ -100,14 +101,7 @@ const Index = ({ activeTab, onTabChange }: IndexProps) => {
         </div>
       </main>
       
-      {/* Footer */}
-      <footer className="border-t border-border/40 mt-4 relative z-10">
-        <div className="max-w-[1200px] mx-auto px-4 py-4 md:py-6">
-          <div className="text-center text-muted-foreground text-sm">
-            <p>&copy; 2024 DorkFi Protocol. Dive into the depths of DeFi.</p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };

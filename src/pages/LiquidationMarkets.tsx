@@ -5,6 +5,7 @@ import { LiquidationAccount } from '@/hooks/useLiquidationData';
 import { mockLiquidationData } from '@/utils/liquidationUtils';
 import EnhancedAccountDetailModal from '@/components/liquidation/EnhancedAccountDetailModal';
 import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 import LiquidationHeroSection from '@/components/liquidation/LiquidationHeroSection';
 import LiquidityRiskOverview from '@/components/liquidation/LiquidityRiskOverview';
 
@@ -122,6 +123,8 @@ export default function LiquidationMarkets({ activeTab, onTabChange }: Liquidati
             )}
         </div>
       </main>
+      
+      <Footer />
     </div>
   );
 }
