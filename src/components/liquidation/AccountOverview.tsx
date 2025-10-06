@@ -77,13 +77,13 @@ export default function AccountOverview({ account, onInitiateLiquidation }: Acco
       {isLiquidatable && (
         <Alert 
           variant="destructive" 
-          className="border-2 border-destructive"
+          className="border-2 border-destructive w-full"
         >
-          <AlertTriangle className="h-4 w-4" />
+          <AlertTriangle className="h-4 w-4 flex-shrink-0" />
           <AlertTitle className="text-base font-semibold">
             Critical Risk Warning
           </AlertTitle>
-          <AlertDescription className="text-sm">
+          <AlertDescription className="text-sm break-words">
             This position can be liquidated immediately. The health factor is below 1.0, making it eligible for liquidation by any user.
             Liquidators can claim up to 50% of the collateral with a 5% bonus.
           </AlertDescription>
