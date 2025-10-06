@@ -156,10 +156,10 @@ const LiquidationCongrats: React.FC<LiquidationCongratsProps> = ({
           <button
             onClick={handleTwitterShare}
             className="flex items-center justify-center gap-2 px-4 py-2 bg-[#1DA1F2] hover:bg-[#1a8cd8] text-white rounded-lg transition-colors"
-            title="Share on Twitter/X"
+            title="Share on X"
           >
             <Twitter className="w-4 h-4" />
-            <span className="text-sm">Twitter</span>
+            <span className="text-sm">X</span>
           </button>
           <button
             onClick={handleCopyLink}
