@@ -27,7 +27,7 @@ const DepositModal = ({ isOpen, onClose, tokenSymbol, tokenIcon, userBalance, ma
   const [amount, setAmount] = useState("");
   const [fiatValue, setFiatValue] = useState(0);
   const [showSuccess, setShowSuccess] = useState(false);
-  const [collateralType, setCollateralType] = useState<string>("standard");
+  const [collateralType, setCollateralType] = useState<string>("VOI");
 
   // Reset states when modal opens/closes
   useEffect(() => {
@@ -35,7 +35,7 @@ const DepositModal = ({ isOpen, onClose, tokenSymbol, tokenIcon, userBalance, ma
       setShowSuccess(false);
       setAmount("");
       setFiatValue(0);
-      setCollateralType("standard");
+      setCollateralType("VOI");
     }
   }, [isOpen]);
 
@@ -73,7 +73,7 @@ const DepositModal = ({ isOpen, onClose, tokenSymbol, tokenIcon, userBalance, ma
     setShowSuccess(false);
     setAmount("");
     setFiatValue(0);
-    setCollateralType("standard");
+    setCollateralType("VOI");
   };
 
   const isValidAmount = amount && parseFloat(amount) > 0 && parseFloat(amount) <= userBalance;
@@ -116,21 +116,22 @@ const DepositModal = ({ isOpen, onClose, tokenSymbol, tokenIcon, userBalance, ma
               <div className="space-y-6 pt-2 px-8 pb-8">
                 <div className="space-y-3">
                   <Label htmlFor="collateral-type" className="text-sm font-medium text-slate-600 dark:text-slate-300">
-                    Collateral Type
+                    Collateral Asset
                   </Label>
                   <Select value={collateralType} onValueChange={setCollateralType}>
                     <SelectTrigger className="bg-white/80 dark:bg-slate-800 border-gray-300 dark:border-slate-600 text-slate-800 dark:text-white h-12">
-                      <SelectValue placeholder="Select collateral type" />
+                      <SelectValue placeholder="Select collateral asset" />
                     </SelectTrigger>
                     <SelectContent className="bg-white dark:bg-slate-800 border-gray-300 dark:border-slate-600 z-50">
-                      <SelectItem value="standard">Standard Collateral</SelectItem>
-                      <SelectItem value="high-ltv">High LTV Collateral</SelectItem>
-                      <SelectItem value="stable">Stable Collateral</SelectItem>
-                      <SelectItem value="volatile">Volatile Collateral</SelectItem>
+                      <SelectItem value="VOI">VOI</SelectItem>
+                      <SelectItem value="wBTC">wBTC</SelectItem>
+                      <SelectItem value="wETH">wETH</SelectItem>
+                      <SelectItem value="UNIT">UNIT</SelectItem>
+                      <SelectItem value="USDC">USDC</SelectItem>
                     </SelectContent>
                   </Select>
                   <p className="text-xs text-slate-400 dark:text-slate-500">
-                    Different collateral types have different borrowing power and liquidation thresholds
+                    Select which asset to use as collateral for borrowing
                   </p>
                 </div>
 
