@@ -8,6 +8,7 @@ import { InfoIcon } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import SupplyBorrowCongrats from "./SupplyBorrowCongrats";
+import { getTokenImagePath } from "@/utils/tokenImageUtils";
 
 interface DepositModalProps {
   isOpen: boolean;
@@ -31,12 +32,12 @@ const DepositModal = ({ isOpen, onClose, tokenSymbol, tokenIcon, userBalance, ma
 
   // Map collateral assets to their icons
   const assetIcons: Record<string, string> = useMemo(() => ({
-    VOI: "https://pbs.twimg.com/profile_images/1722348985962688512/yFGLQPHw_400x400.jpg",
-    wBTC: "https://cryptologos.cc/logos/bitcoin-btc-logo.png",
-    wETH: "https://cryptologos.cc/logos/ethereum-eth-logo.png",
-    UNIT: tokenIcon, // Use default or provide specific icon
-    USDC: "https://cryptologos.cc/logos/usd-coin-usdc-logo.png"
-  }), [tokenIcon]);
+    VOI: getTokenImagePath('VOI'),
+    wBTC: getTokenImagePath('BTC'),
+    wETH: getTokenImagePath('ETH'),
+    UNIT: getTokenImagePath('UNIT'),
+    USDC: getTokenImagePath('USDC')
+  }), []);
 
   // Get current collateral display info
   const currentCollateralIcon = assetIcons[collateralType] || tokenIcon;
