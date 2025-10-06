@@ -1,6 +1,6 @@
 
 import React from "react";
-import { CheckCircle2, Sparkles, Twitter, Link2, Wallet } from "lucide-react";
+import { CheckCircle2, Sparkles, Link2, Wallet } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import DorkFiButton from "@/components/ui/DorkFiButton";
 import { LiquidationAccount } from '@/hooks/useLiquidationData';
@@ -155,10 +155,12 @@ const LiquidationCongrats: React.FC<LiquidationCongratsProps> = ({
         <div className="flex gap-2 justify-center">
           <button
             onClick={handleTwitterShare}
-            className="flex items-center justify-center gap-2 px-4 py-2 bg-[#1DA1F2] hover:bg-[#1a8cd8] text-white rounded-lg transition-colors"
+            className="flex items-center justify-center gap-2 px-4 py-2 bg-[#000000] hover:bg-[#1a1a1a] text-white rounded-lg transition-colors"
             title="Share on X"
           >
-            <Twitter className="w-4 h-4" />
+            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+            </svg>
             <span className="text-sm">X</span>
           </button>
           <button
