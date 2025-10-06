@@ -1,10 +1,11 @@
 
 import React from "react";
-import { CheckCircle2, Sparkles, Trophy } from "lucide-react";
+import { CheckCircle2, Sparkles, Trophy, Twitter, Linkedin, Link2, Share2 } from "lucide-react";
 import DorkFiButton from "@/components/ui/DorkFiButton";
 import { LiquidationAccount } from '@/hooks/useLiquidationData';
 import { LiquidationParams } from './EnhancedAccountDetailModal';
 import { shortenAddress } from '@/utils/liquidationUtils';
+import { toast } from "@/hooks/use-toast";
 
 interface LiquidationCongratsProps {
   account: LiquidationAccount;
@@ -23,6 +24,57 @@ const LiquidationCongrats: React.FC<LiquidationCongratsProps> = ({
   onLiquidateAnother,
   onClose,
 }) => {
+  const generateShareUrl = () => {
+    const params = new URLSearchParams({
+      bonus: liquidationParams.liquidationBonus.toString(),
+      token: liquidationParams.collateralToken,
+      amount: liquidationParams.collateralAmount.toFixed(4),
+    });
+    return `${window.location.origin}/liquidation-markets?${params.toString()}`;
+  };
+
+  const shareMessage = `Just executed a successful liquidation on DorkFi! 💰 Earned $${liquidationParams.liquidationBonus.toLocaleString()} bonus 🎯 Received ${liquidationParams.collateralAmount.toFixed(4)} ${liquidationParams.collateralToken}\n\nStart liquidating on DorkFi:`;
+
+  const handleTwitterShare = () => {
+    const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareMessage)}&url=${encodeURIComponent(generateShareUrl())}`;
+    window.open(url, '_blank', 'width=550,height=420');
+  };
+
+  const handleLinkedInShare = () => {
+    const url = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(generateShareUrl())}`;
+    window.open(url, '_blank', 'width=550,height=420');
+  };
+
+  const handleCopyLink = async () => {
+    try {
+      await navigator.clipboard.writeText(generateShareUrl());
+      toast({
+        title: "Link copied!",
+        description: "Share link copied to clipboard",
+      });
+    } catch (err) {
+      toast({
+        title: "Failed to copy",
+        description: "Please try again",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const handleNativeShare = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: 'DorkFi Liquidation Success',
+          text: shareMessage,
+          url: generateShareUrl(),
+        });
+      } catch (err) {
+        // User cancelled share
+      }
+    }
+  };
+
   return (
     <div className="flex flex-col items-center justify-center gap-4 animate-fade-in">
       {/* Confetti & Sparkles */}
@@ -66,6 +118,49 @@ const LiquidationCongrats: React.FC<LiquidationCongratsProps> = ({
               ${liquidationParams.liquidationBonus.toLocaleString()} (5%)
             </span>
           </div>
+        </div>
+      </div>
+      
+      {/* Share Section */}
+      <div className="w-full mt-3 mb-2">
+        <h3 className="text-sm font-semibold text-center text-slate-300 mb-3">Share Your Success</h3>
+        <div className="flex gap-2 justify-center">
+          <button
+            onClick={handleTwitterShare}
+            className="flex items-center justify-center gap-2 px-4 py-2 bg-[#1DA1F2] hover:bg-[#1a8cd8] text-white rounded-lg transition-colors"
+            title="Share on Twitter/X"
+          >
+            <Twitter className="w-4 h-4" />
+            <span className="text-sm">Twitter</span>
+          </button>
+          
+          <button
+            onClick={handleLinkedInShare}
+            className="flex items-center justify-center gap-2 px-4 py-2 bg-[#0077B5] hover:bg-[#006399] text-white rounded-lg transition-colors"
+            title="Share on LinkedIn"
+          >
+            <Linkedin className="w-4 h-4" />
+            <span className="text-sm">LinkedIn</span>
+          </button>
+          
+          <button
+            onClick={handleCopyLink}
+            className="flex items-center justify-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors"
+            title="Copy Link"
+          >
+            <Link2 className="w-4 h-4" />
+            <span className="text-sm">Copy</span>
+          </button>
+          
+          {navigator.share && (
+            <button
+              onClick={handleNativeShare}
+              className="flex items-center justify-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors"
+              title="Share"
+            >
+              <Share2 className="w-4 h-4" />
+            </button>
+          )}
         </div>
       </div>
       
