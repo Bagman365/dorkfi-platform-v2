@@ -161,18 +161,18 @@ const LiquidationCongrats: React.FC<LiquidationCongratsProps> = ({
         <div className="flex gap-2 justify-center">
           <button
             onClick={handleTwitterShare}
-            className="flex items-center justify-center w-12 h-12 bg-[#000000] hover:bg-[#1a1a1a] text-white rounded-full transition-all shadow-lg hover:shadow-xl"
+            className="flex items-center justify-center w-10 h-10 hover:scale-110 transition-transform"
             title="Share on X"
           >
-            <img src="/lovable-uploads/x_round_icon.png" alt="X" className="w-6 h-6" />
+            <img src="/lovable-uploads/x_round_icon.png" alt="X" className="w-10 h-10" />
           </button>
           
           <button
             onClick={handleFarcasterShare}
-            className="flex items-center justify-center w-12 h-12 bg-[#855DCD] hover:bg-[#7347bc] text-white rounded-full transition-all shadow-lg hover:shadow-xl"
+            className="flex items-center justify-center w-10 h-10 hover:scale-110 transition-transform"
             title="Share on Farcaster"
           >
-            <img src="/lovable-uploads/farcaster_icon.png" alt="Farcaster" className="w-6 h-6" />
+            <img src="/lovable-uploads/farcaster_icon.png" alt="Farcaster" className="w-10 h-10" />
           </button>
           
           <button
