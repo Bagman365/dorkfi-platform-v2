@@ -55,7 +55,7 @@ const HealthFactorActions = ({
                   : 'bg-ocean-teal hover:bg-ocean-teal/90 text-white'
               } transition-all duration-300`}
             >
-              💎 Add Collateral
+              Add Collateral
             </Button>
           </TooltipTrigger>
           <TooltipContent className="max-w-xs">
