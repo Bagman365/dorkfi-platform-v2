@@ -72,7 +72,7 @@ const HealthFactorActions = ({
               variant="outline"
               className="w-full border-2 border-whale-gold text-whale-gold hover:bg-whale-gold hover:text-black font-bold transition-all duration-300 hover:shadow-lg hover:shadow-whale-gold/20"
             >
-              🪙 Buy VOI
+              Buy VOI
             </Button>
           </TooltipTrigger>
           <TooltipContent className="max-w-xs">
