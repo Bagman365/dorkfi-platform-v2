@@ -66,8 +66,8 @@ const TreasuryChart = () => {
 
   return (
     <ChartCard 
-      title="Insurance & Treasury" 
-      subtitle="Protocol revenue & fee income"
+      title="Protocol Revenue & Fee Income" 
+      subtitle="Revenue breakdown by source"
       tooltip="Protocol revenue from various fee sources and net income after operating costs."
       controls={controls}
     >
