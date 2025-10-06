@@ -36,7 +36,7 @@ const PositionStatsGrid = ({
       {/* Primary Stats - Collateral & Borrowed */}
       <div className="grid grid-cols-2 gap-4">
         <div className="group p-5 rounded-xl bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 border-2 border-green-500/30 hover:border-green-500/50 transition-all duration-300 hover:shadow-lg">
-          <div className="text-xs tracking-wide text-muted-foreground flex items-center gap-1.5 mb-2 font-semibold">
+          <div className="text-xs tracking-wide text-muted-foreground flex items-center justify-center gap-1.5 mb-2 font-semibold">
             <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
             Total Collateral
             <Tooltip>
@@ -48,13 +48,13 @@ const PositionStatsGrid = ({
               </TooltipContent>
             </Tooltip>
           </div>
-          <div className="text-3xl font-bold text-green-600 dark:text-green-400 text-center tracking-tight">
+          <div className="text-3xl font-bold text-green-600 dark:text-green-400 flex items-center justify-center tracking-tight">
             ${totalCollateral >= 1000 ? totalCollateral.toLocaleString('en-US', { maximumFractionDigits: 0 }) : totalCollateral.toLocaleString('en-US', { maximumFractionDigits: 2 })}
           </div>
         </div>
       
         <div className="group p-5 rounded-xl bg-gradient-to-br from-red-50 to-rose-50 dark:from-red-900/20 dark:to-rose-900/20 border-2 border-red-500/30 hover:border-red-500/50 transition-all duration-300 hover:shadow-lg">
-          <div className="text-xs tracking-wide text-muted-foreground flex items-center gap-1.5 mb-2 font-semibold">
+          <div className="text-xs tracking-wide text-muted-foreground flex items-center justify-center gap-1.5 mb-2 font-semibold">
             <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
             Total Borrowed
             <Tooltip>
@@ -66,7 +66,7 @@ const PositionStatsGrid = ({
               </TooltipContent>
             </Tooltip>
           </div>
-          <div className="text-3xl font-bold text-red-600 dark:text-red-400 text-center tracking-tight">
+          <div className="text-3xl font-bold text-red-600 dark:text-red-400 flex items-center justify-center tracking-tight">
             ${totalBorrowed >= 1000 ? totalBorrowed.toLocaleString('en-US', { maximumFractionDigits: 0 }) : totalBorrowed.toLocaleString('en-US', { maximumFractionDigits: 2 })}
           </div>
         </div>
@@ -75,7 +75,7 @@ const PositionStatsGrid = ({
       {/* Secondary Stats - Risk Metrics */}
       <div className="grid grid-cols-2 gap-4">
         <div className="group p-4 rounded-lg bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-900/10 dark:to-cyan-900/10 border border-blue-500/20 hover:border-blue-500/40 transition-all duration-300">
-          <div className="text-xs tracking-wide text-muted-foreground flex items-center gap-1.5 mb-1.5 font-medium">
+          <div className="text-xs tracking-wide text-muted-foreground flex items-center justify-center gap-1.5 mb-1.5 font-medium">
             Liquidation Margin
             <Tooltip>
               <TooltipTrigger asChild>
@@ -86,13 +86,13 @@ const PositionStatsGrid = ({
               </TooltipContent>
             </Tooltip>
           </div>
-          <div className={`text-2xl font-bold ${liquidationMarginColorClass} text-center`}>
+          <div className={`text-2xl font-bold ${liquidationMarginColorClass} flex items-center justify-center`}>
             {liquidationMargin.toFixed(1)}%
           </div>
         </div>
       
         <div className="group p-4 rounded-lg bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-900/10 dark:to-cyan-900/10 border border-blue-500/20 hover:border-blue-500/40 transition-all duration-300">
-          <div className="text-xs tracking-wide text-muted-foreground flex items-center gap-1.5 mb-1.5 font-medium">
+          <div className="text-xs tracking-wide text-muted-foreground flex items-center justify-center gap-1.5 mb-1.5 font-medium">
             Net LTV
             <Tooltip>
               <TooltipTrigger asChild>
@@ -103,7 +103,7 @@ const PositionStatsGrid = ({
               </TooltipContent>
             </Tooltip>
           </div>
-          <div className={`text-2xl font-bold ${ltvColorClass} text-center`}>
+          <div className={`text-2xl font-bold ${ltvColorClass} flex items-center justify-center`}>
             {netLTV.toFixed(1)}%
           </div>
         </div>
