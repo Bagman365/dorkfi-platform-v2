@@ -36,7 +36,7 @@ const PositionStatsGrid = ({
       {/* Primary Stats - Collateral & Borrowed */}
       <div className="grid grid-cols-2 gap-4">
         <div className="group p-5 rounded-xl bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 border-2 border-green-500/30 hover:border-green-500/50 transition-all duration-300 hover:shadow-lg">
-          <div className="text-xs uppercase tracking-wide text-muted-foreground flex items-center gap-1.5 mb-2 font-semibold">
+          <div className="text-xs tracking-wide text-muted-foreground flex items-center gap-1.5 mb-2 font-semibold">
             <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
             Total Collateral
             <Tooltip>
@@ -54,7 +54,7 @@ const PositionStatsGrid = ({
         </div>
       
         <div className="group p-5 rounded-xl bg-gradient-to-br from-red-50 to-rose-50 dark:from-red-900/20 dark:to-rose-900/20 border-2 border-red-500/30 hover:border-red-500/50 transition-all duration-300 hover:shadow-lg">
-          <div className="text-xs uppercase tracking-wide text-muted-foreground flex items-center gap-1.5 mb-2 font-semibold">
+          <div className="text-xs tracking-wide text-muted-foreground flex items-center gap-1.5 mb-2 font-semibold">
             <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
             Total Borrowed
             <Tooltip>
@@ -75,7 +75,7 @@ const PositionStatsGrid = ({
       {/* Secondary Stats - Risk Metrics */}
       <div className="grid grid-cols-2 gap-4">
         <div className="group p-4 rounded-lg bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-900/10 dark:to-cyan-900/10 border border-blue-500/20 hover:border-blue-500/40 transition-all duration-300">
-          <div className="text-xs uppercase tracking-wide text-muted-foreground flex items-center gap-1.5 mb-1.5 font-medium">
+          <div className="text-xs tracking-wide text-muted-foreground flex items-center gap-1.5 mb-1.5 font-medium">
             Liquidation Margin
             <Tooltip>
               <TooltipTrigger asChild>
@@ -92,7 +92,7 @@ const PositionStatsGrid = ({
         </div>
       
         <div className="group p-4 rounded-lg bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-900/10 dark:to-cyan-900/10 border border-blue-500/20 hover:border-blue-500/40 transition-all duration-300">
-          <div className="text-xs uppercase tracking-wide text-muted-foreground flex items-center gap-1.5 mb-1.5 font-medium">
+          <div className="text-xs tracking-wide text-muted-foreground flex items-center gap-1.5 mb-1.5 font-medium">
             Net LTV
             <Tooltip>
               <TooltipTrigger asChild>
