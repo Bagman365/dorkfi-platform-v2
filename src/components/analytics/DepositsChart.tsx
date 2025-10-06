@@ -1,41 +1,19 @@
-import React, { useState, useMemo } from 'react';
+import React from 'react';
 import { Area, AreaChart, ResponsiveContainer, XAxis, YAxis, Tooltip, CartesianGrid } from 'recharts';
 import ChartCard from './ChartCard';
 import { useAnalyticsData } from '@/hooks/useAnalyticsData';
 import { useTheme } from 'next-themes';
-import TimeRangeToggle, { TimeRange } from './TimeRangeToggle';
-import { aggregateWithAverage, formatDateForRange } from '@/utils/analyticsUtils';
 
 const DepositsChart = () => {
   const { depositsData, loading } = useAnalyticsData();
   const { theme } = useTheme();
-  const [timeRange, setTimeRange] = useState<TimeRange>('daily');
-
-  const aggregatedData = useMemo(() => {
-    return aggregateWithAverage(depositsData, timeRange, ['amount']);
-  }, [depositsData, timeRange]);
-
-  const totalDeposits = useMemo(() => 
-    aggregatedData.reduce((sum, d) => sum + (d.amount || 0), 0),
-    [aggregatedData]
-  );
-
-  const formattedTotal = `$${(totalDeposits / 1_000_000).toFixed(1)}M`;
-
-  const chartData = useMemo(() => 
-    aggregatedData.map(d => ({
-      date: d.date,
-      amount: (d.amount || 0) / 1_000_000,
-    })),
-    [aggregatedData]
-  );
 
   if (loading) {
     return (
       <ChartCard 
         title="Deposits" 
-        subtitle={`Total deposits: ${formattedTotal}`}
-        tooltip="Track deposit volume to monitor user inflows and protocol growth"
+        subtitle="Total deposits: $245.7M"
+        tooltip="Track daily deposit volume to monitor user inflows and protocol growth"
       >
         <div className="flex items-center justify-center h-full">
           <div className="animate-pulse text-muted-foreground">Loading...</div>
@@ -44,14 +22,19 @@ const DepositsChart = () => {
     );
   }
 
-  const controls = <TimeRangeToggle value={timeRange} onChange={setTimeRange} />;
+  const totalDeposits = depositsData.reduce((sum, d) => sum + d.amount, 0);
+  const formattedTotal = `$${(totalDeposits / 1_000_000).toFixed(1)}M`;
+
+  const chartData = depositsData.map(d => ({
+    date: new Date(d.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
+    amount: d.amount / 1_000_000,
+  }));
 
   return (
     <ChartCard 
       title="Deposits" 
       subtitle={`Total deposits: ${formattedTotal}`}
-      tooltip="Track deposit volume to monitor user inflows and protocol growth"
-      controls={controls}
+      tooltip="Track daily deposit volume to monitor user inflows and protocol growth"
     >
       <ResponsiveContainer width="100%" height="100%">
         <AreaChart data={chartData}>
@@ -67,7 +50,6 @@ const DepositsChart = () => {
             stroke="hsl(var(--muted-foreground))"
             fontSize={12}
             tickLine={false}
-            tickFormatter={(value) => formatDateForRange(value, timeRange)}
           />
           <YAxis 
             stroke="hsl(var(--muted-foreground))"

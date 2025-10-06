@@ -1,20 +1,13 @@
-import React, { useState, useMemo } from 'react';
+import React from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 import ChartCard from './ChartCard';
 import { useAnalyticsData } from '@/hooks/useAnalyticsData';
-import { formatCurrency, formatDateForRange, aggregateWithAverage } from '@/utils/analyticsUtils';
+import { formatCurrency, formatChartDate } from '@/utils/analyticsUtils';
 import { useTheme } from 'next-themes';
-import TimeRangeToggle, { TimeRange } from './TimeRangeToggle';
 
 const LoanVolumeChart = () => {
   const { loanData, loading } = useAnalyticsData();
   const { theme } = useTheme();
-  const [timeRange, setTimeRange] = useState<TimeRange>('daily');
-
-  const aggregatedVolume = useMemo(() => {
-    if (!loanData) return [];
-    return aggregateWithAverage(loanData.volume, timeRange, ['loans', 'repayments']);
-  }, [loanData, timeRange]);
 
   if (loading || !loanData) {
     return (
@@ -30,7 +23,7 @@ const LoanVolumeChart = () => {
     if (active && payload && payload.length) {
       return (
         <div className="bg-background border border-border rounded-lg p-3 shadow-lg">
-          <p className="font-medium">{formatDateForRange(label, timeRange)}</p>
+          <p className="font-medium">{formatChartDate(label)}</p>
           {payload.map((entry: any, index: number) => (
             <p key={index} style={{ color: entry.color }} className="text-sm">
               {entry.name}: {formatCurrency(entry.value)}
@@ -42,23 +35,20 @@ const LoanVolumeChart = () => {
     return null;
   };
 
-  const controls = <TimeRangeToggle value={timeRange} onChange={setTimeRange} />;
-
   return (
     <div className="space-y-4">
     <ChartCard 
       title="Loan Volume vs Repayments" 
-      subtitle={`Lending activity (${timeRange})`}
-      tooltip="Volume of new loans versus repayments. Shows lending activity and liquidity flow patterns."
-      controls={controls}
+      subtitle="Daily lending activity"
+      tooltip="Daily volume of new loans versus repayments. Shows lending activity and liquidity flow patterns."
     >
         <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={aggregatedVolume}>
+          <LineChart data={loanData.volume}>
             <CartesianGrid strokeDasharray="3 3" stroke={theme === 'dark' ? 'rgb(30, 41, 59)' : 'rgb(226, 232, 240)'} />
             <XAxis 
               dataKey="date" 
               tick={{ fontSize: 12 }}
-              tickFormatter={(value) => formatDateForRange(value, timeRange)}
+              tickFormatter={(value) => formatChartDate(value)}
             />
             <YAxis 
               tick={{ fontSize: 12 }}

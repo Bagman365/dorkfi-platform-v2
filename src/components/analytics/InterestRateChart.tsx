@@ -1,24 +1,13 @@
-import React, { useState, useMemo } from 'react';
+import React from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 import ChartCard from './ChartCard';
 import { useAnalyticsData } from '@/hooks/useAnalyticsData';
-import { formatPercentage, formatDateForRange, aggregateWithAverage } from '@/utils/analyticsUtils';
+import { formatPercentage, formatChartDate } from '@/utils/analyticsUtils';
 import { useTheme } from 'next-themes';
-import TimeRangeToggle, { TimeRange } from './TimeRangeToggle';
 
 const InterestRateChart = () => {
   const { interestRateData, loading } = useAnalyticsData();
   const { theme } = useTheme();
-  const [timeRange, setTimeRange] = useState<TimeRange>('daily');
-
-  const aggregatedData = useMemo(() => {
-    return aggregateWithAverage(
-      interestRateData,
-      timeRange,
-      [],
-      ['wethSupply', 'wethBorrow', 'usdcSupply', 'usdcBorrow']
-    );
-  }, [interestRateData, timeRange]);
 
   if (loading) {
     return (
@@ -30,13 +19,11 @@ const InterestRateChart = () => {
     );
   }
 
-  const controls = <TimeRangeToggle value={timeRange} onChange={setTimeRange} />;
-
   const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
       return (
         <div className="bg-background border border-border rounded-lg p-3 shadow-lg">
-          <p className="font-medium">{formatDateForRange(label, timeRange)}</p>
+          <p className="font-medium">{formatChartDate(label)}</p>
           {payload.map((entry: any, index: number) => (
             <p key={index} style={{ color: entry.color }} className="text-sm">
               {entry.name}: {formatPercentage(entry.value)}
@@ -52,16 +39,15 @@ const InterestRateChart = () => {
     <ChartCard 
       title="Interest Rate Trends" 
       subtitle="Supply vs Borrow APY by asset"
-      controls={controls}
       tooltip="Interest rates over time for lending (supply) and borrowing. Dashed lines show supply APY, solid lines show borrow APY."
     >
       <ResponsiveContainer width="100%" height="100%">
-        <LineChart data={aggregatedData}>
+        <LineChart data={interestRateData}>
           <CartesianGrid strokeDasharray="3 3" stroke={theme === 'dark' ? 'rgb(30, 41, 59)' : 'rgb(226, 232, 240)'} />
           <XAxis 
             dataKey="date" 
             tick={{ fontSize: 12 }}
-            tickFormatter={(value) => formatDateForRange(value, timeRange)}
+            tickFormatter={(value) => formatChartDate(value)}
           />
           <YAxis 
             tick={{ fontSize: 12 }}

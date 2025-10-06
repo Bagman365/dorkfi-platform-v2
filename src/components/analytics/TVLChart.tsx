@@ -1,25 +1,15 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
 import { LineChart, Line, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 import ChartCard from './ChartCard';
 import { Button } from '@/components/ui/button';
 import { useAnalyticsData } from '@/hooks/useAnalyticsData';
-import { formatCurrency, formatDateForRange, aggregateWithAverage } from '@/utils/analyticsUtils';
+import { formatCurrency, formatChartDate } from '@/utils/analyticsUtils';
 import { useTheme } from 'next-themes';
-import TimeRangeToggle, { TimeRange } from './TimeRangeToggle';
 
 const TVLChart = () => {
   const { tvlData, loading } = useAnalyticsData();
   const { theme } = useTheme();
   const [viewMode, setViewMode] = useState<'total' | 'stacked'>('total');
-  const [timeRange, setTimeRange] = useState<TimeRange>('daily');
-
-  const aggregatedData = useMemo(() => {
-    return aggregateWithAverage(
-      tvlData,
-      timeRange,
-      ['total', 'weth', 'usdc', 'usdt', 'wbtc']
-    );
-  }, [tvlData, timeRange]);
 
   if (loading) {
     return (
@@ -32,26 +22,23 @@ const TVLChart = () => {
   }
 
   const controls = (
-    <div className="flex gap-3">
-      <TimeRangeToggle value={timeRange} onChange={setTimeRange} />
-      <div className="flex gap-2">
-        <Button
-          size="sm"
-          variant={viewMode === 'total' ? 'default' : 'outline'}
-          onClick={() => setViewMode('total')}
-          className="text-xs"
-        >
-          Total
-        </Button>
-        <Button
-          size="sm"
-          variant={viewMode === 'stacked' ? 'default' : 'outline'}
-          onClick={() => setViewMode('stacked')}
-          className="text-xs"
-        >
-          By Asset
-        </Button>
-      </div>
+    <div className="flex gap-2">
+      <Button
+        size="sm"
+        variant={viewMode === 'total' ? 'default' : 'outline'}
+        onClick={() => setViewMode('total')}
+        className="text-xs"
+      >
+        Total
+      </Button>
+      <Button
+        size="sm"
+        variant={viewMode === 'stacked' ? 'default' : 'outline'}
+        onClick={() => setViewMode('stacked')}
+        className="text-xs"
+      >
+        By Asset
+      </Button>
     </div>
   );
 
@@ -59,7 +46,7 @@ const TVLChart = () => {
     if (active && payload && payload.length) {
       return (
         <div className="bg-background border border-border rounded-lg p-3 shadow-lg">
-          <p className="font-medium">{formatDateForRange(label, timeRange)}</p>
+          <p className="font-medium">{formatChartDate(label)}</p>
           {payload.map((entry: any, index: number) => (
             <p key={index} style={{ color: entry.color }} className="text-sm">
               {entry.name}: {formatCurrency(entry.value)}
@@ -79,12 +66,12 @@ const TVLChart = () => {
     >
       <ResponsiveContainer width="100%" height="100%">
         {viewMode === 'total' ? (
-          <LineChart data={aggregatedData}>
+          <LineChart data={tvlData}>
             <CartesianGrid strokeDasharray="3 3" stroke={theme === 'dark' ? 'rgb(30, 41, 59)' : 'rgb(226, 232, 240)'} />
             <XAxis 
               dataKey="date" 
               tick={{ fontSize: 12 }}
-              tickFormatter={(value) => formatDateForRange(value, timeRange)}
+              tickFormatter={(value) => formatChartDate(value)}
             />
             <YAxis 
               tick={{ fontSize: 12 }}
@@ -101,12 +88,12 @@ const TVLChart = () => {
             />
           </LineChart>
         ) : (
-          <AreaChart data={aggregatedData}>
+          <AreaChart data={tvlData}>
             <CartesianGrid strokeDasharray="3 3" stroke={theme === 'dark' ? 'rgb(30, 41, 59)' : 'rgb(226, 232, 240)'} />
             <XAxis 
               dataKey="date" 
               tick={{ fontSize: 12 }}
-              tickFormatter={(value) => formatDateForRange(value, timeRange)}
+              tickFormatter={(value) => formatChartDate(value)}
             />
             <YAxis 
               tick={{ fontSize: 12 }}
