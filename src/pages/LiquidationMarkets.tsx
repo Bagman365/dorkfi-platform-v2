@@ -7,7 +7,7 @@ import EnhancedAccountDetailModal from '@/components/liquidation/EnhancedAccount
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import LiquidationHeroSection from '@/components/liquidation/LiquidationHeroSection';
-import LiquidityRiskOverview from '@/components/liquidation/LiquidityRiskOverview';
+
 
 
 import LiquidationQueueTable from '@/components/liquidation/LiquidationQueueTable';
@@ -80,8 +80,6 @@ export default function LiquidationMarkets({ activeTab, onTabChange }: Liquidati
           {/* Hero Section */}
           <LiquidationHeroSection />
 
-          {/* New Charts Section */}
-          <LiquidityRiskOverview />
 
           {/* Summary Cards */}
           <HorizontalSummaryCards
