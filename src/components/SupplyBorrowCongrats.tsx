@@ -1,6 +1,6 @@
 
 import React from "react";
-import { CheckCircle2, Sparkles, Link2, X, MessageCircle } from "lucide-react";
+import { CheckCircle2, Sparkles, Link2, MessageCircle } from "lucide-react";
 import DorkFiButton from "@/components/ui/DorkFiButton";
 import { toast } from "@/hooks/use-toast";
 
@@ -129,7 +129,9 @@ const SupplyBorrowCongrats: React.FC<SupplyBorrowCongratsProps> = ({
             className="flex items-center justify-center w-12 h-12 bg-[#000000] hover:bg-[#1a1a1a] text-white rounded-full hover:scale-110 transition-all shadow-lg hover:shadow-xl"
             title="Share on X"
           >
-            <X className="w-5 h-5 stroke-[3]" />
+            <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z" />
+            </svg>
           </button>
           <button
             onClick={handleCopyLink}
