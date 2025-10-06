@@ -106,7 +106,7 @@ export default function HealthWaterGauge({ healthFactor, avatarSrc }: Props) {
               >
                 <div className={`h-[2px] w-8 ${threshold.color}`} />
                 <span className="text-[10px] text-white/70 ml-2 font-medium whitespace-nowrap">
-                  {threshold.label} ({threshold.hf})
+                  ({threshold.hf}) {threshold.label}
                 </span>
               </div>
             );
