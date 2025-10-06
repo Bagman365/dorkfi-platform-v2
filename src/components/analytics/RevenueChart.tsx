@@ -45,7 +45,7 @@ const RevenueChart = () => {
     <ChartCard 
       title="Revenue Breakdown" 
       subtitle="Monthly revenue by source"
-      tooltip="Protocol revenue from different sources: interest from lending, liquidation fees, and flash loan fees."
+      tooltip="Protocol revenue from different sources: interest from lending, liquidation fees, and block rewards."
     >
       <ResponsiveContainer width="100%" height="100%">
         <BarChart data={revenueData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
@@ -75,7 +75,7 @@ const RevenueChart = () => {
             dataKey="flashLoans" 
             stackId="a" 
             fill="hsl(var(--highlight-aqua))" 
-            name="Flash Loans"
+            name="Block Rewards"
             radius={[4, 4, 0, 0]}
           />
         </BarChart>
