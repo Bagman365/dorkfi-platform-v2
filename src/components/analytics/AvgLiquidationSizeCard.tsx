@@ -26,7 +26,6 @@ const AvgLiquidationSizeCard = () => {
       value={`$${(avgLiquidationSize / 1000).toFixed(1)}K`}
       change={change}
       subtitle="vs last month"
-      iconImage="/lovable-uploads/WAD_v2.png"
     />
   );
 };
