@@ -46,8 +46,7 @@ const EnhancedHealthFactor = ({
             <div className="space-y-6">
               {/* Header */}
               <div className="flex items-center justify-between pb-4 border-b-2 border-ocean-teal/20">
-                <h2 className="text-2xl font-bold text-slate-800 dark:text-white flex items-center gap-3">
-                  <span className="w-1.5 h-8 bg-gradient-to-b from-ocean-teal to-highlight-aqua rounded-full"></span>
+                <h2 className="text-2xl font-bold text-slate-800 dark:text-white">
                   Position Overview
                 </h2>
               </div>
