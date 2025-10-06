@@ -19,7 +19,7 @@ const Footer = () => {
               Documentation <ExternalLink size={14} />
             </a>
             <a 
-              href="https://discord.gg/dorkfi" 
+              href="https://discord.gg/ApP6PXVV" 
               target="_blank" 
               rel="noopener noreferrer" 
               className="inline-flex h-8 w-8 items-center justify-center text-muted-foreground hover:text-ocean-teal transition-colors" 
