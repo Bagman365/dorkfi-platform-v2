@@ -65,19 +65,17 @@ export default function HorizontalSummaryCards({
             style={{ animationDelay: `${index * 150}ms` }}
           >
             <CardContent className="p-4 flex items-center h-full">
-              <div className="flex items-center justify-between gap-4 w-full">
-                <div className="flex items-center gap-3">
-                  <div className={`p-2 rounded-xl ${metric.color} border`}>
-                    <Icon className={`h-5 w-5 ${metric.iconColor}`} />
-                  </div>
-                  <div className="space-y-1 flex flex-col justify-center flex-1 text-center">
-                    <p className="text-sm font-medium text-muted-foreground">
-                      {metric.title}
-                    </p>
-                    <p className="text-2xl font-bold text-foreground">
-                      {metric.value}
-                    </p>
-                  </div>
+              <div className="grid grid-cols-[auto,1fr,auto] items-center gap-4 w-full">
+                <div className={`p-2 rounded-xl ${metric.color} border`}>
+                  <Icon className={`h-5 w-5 ${metric.iconColor}`} />
+                </div>
+                <div className="space-y-1 text-center justify-self-center">
+                  <p className="text-sm font-medium text-muted-foreground">
+                    {metric.title}
+                  </p>
+                  <p className="text-2xl font-bold text-foreground">
+                    {metric.value}
+                  </p>
                 </div>
                 <Badge 
                   variant="outline" 
