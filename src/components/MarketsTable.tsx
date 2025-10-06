@@ -8,6 +8,7 @@ import { useMarketData, SortField, SortOrder } from "@/hooks/useMarketData";
 import MarketSearchFilters from "@/components/markets/MarketSearchFilters";
 import MarketPagination from "@/components/markets/MarketPagination";
 import SupplyBorrowModal from "@/components/SupplyBorrowModal";
+import WithdrawModal from "@/components/WithdrawModal";
 import MarketDetailModal from "@/components/MarketDetailModal";
 import MarketsHeroSection from "@/components/markets/MarketsHeroSection";
 import MarketsTableContent from "@/components/markets/MarketsTableContent";
@@ -17,6 +18,7 @@ const MarketsTable = () => {
   const [sortField, setSortField] = useState<SortField>("totalSupplyUSD");
   const [sortOrder, setSortOrder] = useState<SortOrder>("desc");
   const [depositModal, setDepositModal] = useState({ isOpen: false, asset: null });
+  const [withdrawModal, setWithdrawModal] = useState({ isOpen: false, asset: null });
   const [borrowModal, setBorrowModal] = useState({ isOpen: false, asset: null });
   const [detailModal, setDetailModal] = useState({ isOpen: false, asset: null, marketData: null });
 
@@ -50,12 +52,20 @@ const MarketsTable = () => {
     setDepositModal({ isOpen: true, asset });
   };
 
+  const handleWithdrawClick = (asset: string) => {
+    setWithdrawModal({ isOpen: true, asset });
+  };
+
   const handleBorrowClick = (asset: string) => {
     setBorrowModal({ isOpen: true, asset });
   };
 
   const handleCloseDepositModal = () => {
     setDepositModal({ isOpen: false, asset: null });
+  };
+
+  const handleCloseWithdrawModal = () => {
+    setWithdrawModal({ isOpen: false, asset: null });
   };
 
   const handleCloseBorrowModal = () => {
@@ -143,6 +153,7 @@ const MarketsTable = () => {
               onRowClick={handleRowClick}
               onInfoClick={handleInfoClick}
               onDepositClick={handleDepositClick}
+              onWithdrawClick={handleWithdrawClick}
               onBorrowClick={handleBorrowClick}
             />
           </CardContent>
@@ -174,6 +185,23 @@ const MarketsTable = () => {
             asset={depositModal.asset}
             mode="deposit"
             assetData={getAssetData(depositModal.asset)}
+          />
+        )}
+
+        {/* Withdraw Modal */}
+        {withdrawModal.isOpen && withdrawModal.asset && getAssetData(withdrawModal.asset) && (
+          <WithdrawModal
+            isOpen={withdrawModal.isOpen}
+            onClose={handleCloseWithdrawModal}
+            tokenSymbol={withdrawModal.asset}
+            tokenIcon={getAssetData(withdrawModal.asset).icon}
+            currentlyDeposited={1000}
+            marketStats={{
+              supplyAPY: getAssetData(withdrawModal.asset).supplyAPY,
+              utilization: getAssetData(withdrawModal.asset).utilization,
+              collateralFactor: getAssetData(withdrawModal.asset).collateralFactor,
+              tokenPrice: 1.0,
+            }}
           />
         )}
 

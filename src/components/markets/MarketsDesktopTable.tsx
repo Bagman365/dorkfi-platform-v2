@@ -20,6 +20,7 @@ interface MarketsDesktopTableProps {
   onRowClick: (market: MarketData) => void;
   onInfoClick: (e: React.MouseEvent, market: MarketData) => void;
   onDepositClick: (asset: string) => void;
+  onWithdrawClick: (asset: string) => void;
   onBorrowClick: (asset: string) => void;
 }
 
@@ -30,7 +31,7 @@ const headerTooltips = {
   totalBorrow: "Total value currently borrowed in this market.",
   borrowAPY: "Annual Percentage Yield charged for borrowing this asset.",
   utilization: "Percentage of deposited assets that are currently borrowed.",
-  actions: "Quick actions to deposit or borrow the selected asset.",
+  actions: "Quick actions to deposit, withdraw, or borrow the selected asset.",
 };
 
 const MarketsDesktopTable = ({
@@ -38,6 +39,7 @@ const MarketsDesktopTable = ({
   onRowClick,
   onInfoClick,
   onDepositClick,
+  onWithdrawClick,
   onBorrowClick,
 }: MarketsDesktopTableProps) => {
   if (markets.length === 0) {
@@ -239,6 +241,7 @@ const MarketsDesktopTable = ({
                   <MarketsTableActions
                     asset={market.asset}
                     onDepositClick={onDepositClick}
+                    onWithdrawClick={onWithdrawClick}
                     onBorrowClick={onBorrowClick}
                   />
                 </TableCell>

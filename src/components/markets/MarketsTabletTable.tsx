@@ -12,6 +12,7 @@ interface MarketsTabletTableProps {
   onRowClick: (market: MarketData) => void;
   onInfoClick: (e: React.MouseEvent, market: MarketData) => void;
   onDepositClick: (asset: string) => void;
+  onWithdrawClick: (asset: string) => void;
   onBorrowClick: (asset: string) => void;
 }
 
@@ -20,6 +21,7 @@ const MarketsTabletTable = ({
   onRowClick,
   onInfoClick,
   onDepositClick,
+  onWithdrawClick,
   onBorrowClick,
 }: MarketsTabletTableProps) => {
   if (markets.length === 0) {
@@ -92,6 +94,7 @@ const MarketsTabletTable = ({
                 <MarketsTableActions
                   asset={market.asset}
                   onDepositClick={onDepositClick}
+                  onWithdrawClick={onWithdrawClick}
                   onBorrowClick={onBorrowClick}
                 />
               </TableCell>

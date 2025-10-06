@@ -10,6 +10,7 @@ interface MarketsTableContentProps {
   onRowClick: (market: MarketData) => void;
   onInfoClick: (e: React.MouseEvent, market: MarketData) => void;
   onDepositClick: (asset: string) => void;
+  onWithdrawClick: (asset: string) => void;
   onBorrowClick: (asset: string) => void;
 }
 
@@ -17,7 +18,8 @@ const MarketsTableContent = ({
   markets, 
   onRowClick, 
   onInfoClick, 
-  onDepositClick, 
+  onDepositClick,
+  onWithdrawClick, 
   onBorrowClick 
 }: MarketsTableContentProps) => {
   const breakpoint = useBreakpoint();
@@ -29,6 +31,7 @@ const MarketsTableContent = ({
         onRowClick={onRowClick}
         onInfoClick={onInfoClick}
         onDepositClick={onDepositClick}
+        onWithdrawClick={onWithdrawClick}
         onBorrowClick={onBorrowClick}
       />
     );
@@ -41,6 +44,7 @@ const MarketsTableContent = ({
         onRowClick={onRowClick}
         onInfoClick={onInfoClick}
         onDepositClick={onDepositClick}
+        onWithdrawClick={onWithdrawClick}
         onBorrowClick={onBorrowClick}
       />
     );
@@ -53,6 +57,7 @@ const MarketsTableContent = ({
       onRowClick={onRowClick}
       onInfoClick={onInfoClick}
       onDepositClick={onDepositClick}
+      onWithdrawClick={onWithdrawClick}
       onBorrowClick={onBorrowClick}
     />
   );

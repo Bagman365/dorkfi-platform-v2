@@ -12,6 +12,7 @@ interface MarketCardViewProps {
   onRowClick: (market: MarketData) => void;
   onInfoClick: (e: React.MouseEvent, market: MarketData) => void;
   onDepositClick: (asset: string) => void;
+  onWithdrawClick: (asset: string) => void;
   onBorrowClick: (asset: string) => void;
 }
 
@@ -19,7 +20,8 @@ const MarketCardView = ({
   markets, 
   onRowClick, 
   onInfoClick, 
-  onDepositClick, 
+  onDepositClick,
+  onWithdrawClick, 
   onBorrowClick 
 }: MarketCardViewProps) => {
   if (markets.length === 0) {
@@ -95,6 +97,10 @@ const MarketCardView = ({
               variant="secondary"
               onClick={e => { e.stopPropagation(); onDepositClick(market.asset); }}
             >Deposit</DorkFiButton>
+            <DorkFiButton
+              variant="danger-outline"
+              onClick={e => { e.stopPropagation(); onWithdrawClick(market.asset); }}
+            >Withdraw</DorkFiButton>
             <DorkFiButton
               variant="borrow-outline"
               onClick={e => { e.stopPropagation(); onBorrowClick(market.asset); }}
