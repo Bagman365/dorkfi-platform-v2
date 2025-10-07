@@ -4,10 +4,14 @@ import ChartCard from './ChartCard';
 import { useAnalyticsData } from '@/hooks/useAnalyticsData';
 import { formatPercentage, formatChartDate } from '@/utils/analyticsUtils';
 import { useTheme } from 'next-themes';
+import { useBreakpoint } from '@/hooks/useBreakpoint';
 
 const InterestRateChart = () => {
   const { interestRateData, loading } = useAnalyticsData();
   const { theme } = useTheme();
+  const breakpoint = useBreakpoint();
+  
+  const bottomMargin = breakpoint === 'mobile' ? 30 : 50;
 
   if (loading) {
     return (
@@ -42,7 +46,7 @@ const InterestRateChart = () => {
       tooltip="Interest rates over time for lending (supply) and borrowing. Dashed lines show supply APY, solid lines show borrow APY."
     >
       <ResponsiveContainer width="100%" height="100%">
-        <LineChart data={interestRateData} margin={{ top: 5, right: 10, left: -10, bottom: 50 }}>
+        <LineChart data={interestRateData} margin={{ top: 5, right: 10, left: -10, bottom: bottomMargin }}>
           <CartesianGrid strokeDasharray="3 3" stroke={theme === 'dark' ? 'rgb(30, 41, 59)' : 'rgb(226, 232, 240)'} />
           <XAxis 
             dataKey="date" 
@@ -95,7 +99,7 @@ const InterestRateChart = () => {
           />
         </LineChart>
       </ResponsiveContainer>
-      <div className="mt-2 flex flex-wrap items-center justify-center gap-2 text-[10px] sm:text-xs">
+      <div className="mt-1 sm:mt-2 flex flex-wrap items-center justify-center gap-1 sm:gap-2 text-[9px] sm:text-xs">
         <div className="flex items-center gap-1">
           <span className="inline-block h-2 w-2 rounded-full" style={{ backgroundColor: 'hsl(var(--ocean-teal))' }} />
           <span>WETH Borrow APY</span>
