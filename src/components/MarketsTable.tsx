@@ -123,7 +123,7 @@ const MarketsTable = () => {
         />
 
         {/* Markets Table */}
-        <Card className="card-hover bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-slate-900 dark:to-slate-800 shadow-md border border-gray-200/50 dark:border-ocean-teal/20">
+        <Card className="card-hover bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-slate-900 dark:to-slate-800 shadow-md border border-gray-200/50 dark:border-ocean-teal/20 overflow-visible">
           <CardHeader className="pb-4">
             <div className="flex items-start justify-between gap-4">
               <CardTitle className="text-xl md:text-2xl font-bold text-slate-800 dark:text-white">Market Overview</CardTitle>

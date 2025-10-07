@@ -37,7 +37,7 @@ const MarketsTabletTable = ({
   }
 
   return (
-    <div className="overflow-x-auto">
+    <div className="overflow-visible p-2">
       <Table>
         <TableHeader>
           <TableRow>

@@ -55,8 +55,8 @@ const MarketsDesktopTable = ({
   }
 
   return (
-    <div className="overflow-x-auto">
-      <div className="rounded-lg border bg-card text-card-foreground shadow-sm overflow-hidden">
+    <div className="overflow-visible p-2">
+      <div className="rounded-lg border bg-card text-card-foreground shadow-sm overflow-visible">
         <Table>
           <TableHeader>
             <TableRow>
