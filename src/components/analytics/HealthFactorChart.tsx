@@ -48,9 +48,9 @@ const HealthFactorChart = () => {
       tooltip="Distribution of borrower health factors. Values below 1.0 are liquidatable, 1.0-1.1 are high risk, above 1.5 are safe."
       className="h-auto"
     >
-      <div className="h-[200px] sm:h-[240px] mb-3 sm:mb-4">
+      <div className="h-[220px] sm:h-[260px] mb-4 sm:mb-6">
         <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={healthFactorData} margin={{ top: 10, right: 10, left: -10, bottom: 35 }}>
+          <BarChart data={healthFactorData} margin={{ top: 10, right: 10, left: -10, bottom: 20 }}>
             <CartesianGrid strokeDasharray="3 3" stroke={theme === 'dark' ? 'rgb(30, 41, 59)' : 'rgb(226, 232, 240)'} />
             <XAxis 
               dataKey="range" 
@@ -77,7 +77,7 @@ const HealthFactorChart = () => {
       </div>
       
       {/* Risk Summary */}
-      <div className="grid grid-cols-2 md:grid-cols-5 gap-1.5 sm:gap-2 text-[10px] sm:text-xs">
+      <div className="grid grid-cols-3 md:grid-cols-5 gap-1.5 sm:gap-2 text-[10px] sm:text-xs">
         {healthFactorData.map((item, index) => (
           <div key={index} className="text-center p-1.5 sm:p-2 rounded-lg bg-muted/50">
             <div 

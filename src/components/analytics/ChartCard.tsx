@@ -25,7 +25,7 @@ const ChartCard = ({ title, subtitle, children, className = '', controls, toolti
         )}
       </div>
       
-      <div className={className.includes('h-auto') ? 'h-auto' : 'h-[250px] sm:h-[300px]'}>
+      <div className={className.includes('h-auto') ? 'h-auto overflow-visible' : 'h-[280px] sm:h-[320px] overflow-visible'}>
         {children}
       </div>
     </div>

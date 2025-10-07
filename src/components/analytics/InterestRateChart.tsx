@@ -1,5 +1,5 @@
 import React from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import ChartCard from './ChartCard';
 import { useAnalyticsData } from '@/hooks/useAnalyticsData';
 import { formatPercentage, formatChartDate } from '@/utils/analyticsUtils';
@@ -42,7 +42,7 @@ const InterestRateChart = () => {
       tooltip="Interest rates over time for lending (supply) and borrowing. Dashed lines show supply APY, solid lines show borrow APY."
     >
       <ResponsiveContainer width="100%" height="100%">
-        <LineChart data={interestRateData} margin={{ top: 5, right: 10, left: -10, bottom: 70 }}>
+        <LineChart data={interestRateData} margin={{ top: 5, right: 10, left: -10, bottom: 50 }}>
           <CartesianGrid strokeDasharray="3 3" stroke={theme === 'dark' ? 'rgb(30, 41, 59)' : 'rgb(226, 232, 240)'} />
           <XAxis 
             dataKey="date" 
@@ -50,6 +50,8 @@ const InterestRateChart = () => {
             angle={-45}
             textAnchor="end"
             height={60}
+            minTickGap={20}
+            interval="preserveStartEnd"
             tickFormatter={(value) => formatChartDate(value)}
           />
           <YAxis 
@@ -57,12 +59,6 @@ const InterestRateChart = () => {
             tickFormatter={(value) => formatPercentage(value)}
           />
           <Tooltip content={<CustomTooltip />} />
-          <Legend 
-            wrapperStyle={{ fontSize: '11px' }}
-            iconSize={10}
-            verticalAlign="bottom"
-            align="center"
-          />
           <Line 
             type="monotone" 
             dataKey="wethSupply" 
@@ -99,6 +95,24 @@ const InterestRateChart = () => {
           />
         </LineChart>
       </ResponsiveContainer>
+      <div className="mt-2 flex flex-wrap items-center justify-center gap-2 text-[10px] sm:text-xs">
+        <div className="flex items-center gap-1">
+          <span className="inline-block h-2 w-2 rounded-full" style={{ backgroundColor: 'hsl(var(--ocean-teal))' }} />
+          <span>WETH Borrow APY</span>
+        </div>
+        <div className="flex items-center gap-1">
+          <span className="inline-block h-2 w-2 rounded-full" style={{ backgroundColor: 'hsl(var(--ocean-teal))' }} />
+          <span className="opacity-80">(dashed) WETH Supply APY</span>
+        </div>
+        <div className="flex items-center gap-1">
+          <span className="inline-block h-2 w-2 rounded-full" style={{ backgroundColor: 'hsl(var(--whale-gold))' }} />
+          <span>USDC Borrow APY</span>
+        </div>
+        <div className="flex items-center gap-1">
+          <span className="inline-block h-2 w-2 rounded-full" style={{ backgroundColor: 'hsl(var(--whale-gold))' }} />
+          <span className="opacity-80">(dashed) USDC Supply APY</span>
+        </div>
+      </div>
     </ChartCard>
   );
 };
