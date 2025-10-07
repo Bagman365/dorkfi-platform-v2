@@ -139,7 +139,7 @@ const MarketsTable = () => {
               </Button>
             </div>
           </CardHeader>
-          <CardContent>
+          <CardContent className="overflow-visible">
             {/* Informational guidance - matches Liquidations Queue styles */}
             <section aria-label="What you can do here" className="mb-4 hidden md:block">
               <p className="text-sm text-muted-foreground mt-1">What You Can Do Here:</p>
