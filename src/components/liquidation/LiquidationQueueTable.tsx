@@ -255,22 +255,6 @@ export default function LiquidationQueueTable({ accounts, onAccountClick, onLiqu
                             <TooltipContent>View Details</TooltipContent>
                           </Tooltip>
                           
-                          <Tooltip>
-                            <TooltipTrigger asChild>
-                              <Button
-                                variant="ghost"
-                                size="sm"
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  // Open in blockchain explorer
-                                }}
-                                className="hover:bg-ocean-teal/10 hover:scale-105 transition-all p-1 md:p-2 hidden md:flex"
-                              >
-                                <ExternalLink className="h-4 w-4" />
-                              </Button>
-                            </TooltipTrigger>
-                            <TooltipContent>View on Explorer</TooltipContent>
-                          </Tooltip>
                         </div>
                       </TableCell>
                     </TableRow>
