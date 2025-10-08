@@ -9,7 +9,6 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { Checkbox } from "@/components/ui/checkbox";
-import { AlertTriangle } from "lucide-react";
 
 interface RiskDisclaimerModalProps {
   isOpen: boolean;
@@ -23,14 +22,9 @@ const RiskDisclaimerModal = ({ isOpen, onAcknowledge }: RiskDisclaimerModalProps
     <AlertDialog open={isOpen}>
       <AlertDialogContent className="max-w-2xl border-amber-500/20 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
         <AlertDialogHeader>
-          <div className="flex items-center gap-3 mb-2">
-            <div className="p-2 rounded-full bg-amber-500/10 border border-amber-500/20">
-              <AlertTriangle className="h-6 w-6 text-amber-500" />
-            </div>
-            <AlertDialogTitle className="text-2xl text-amber-500">
-              ⚠️ Important Notice
-            </AlertDialogTitle>
-          </div>
+          <AlertDialogTitle className="text-2xl text-amber-500 mb-2">
+            ⚠️ Important Notice
+          </AlertDialogTitle>
           <AlertDialogDescription className="text-slate-300 space-y-4 text-base leading-relaxed">
             <p>
               DorkFi is a decentralized lending protocol. By interacting with these markets, 
