@@ -16,7 +16,7 @@ interface RiskDisclaimerModalProps {
 }
 
 const RiskDisclaimerModal = ({ isOpen, onAcknowledge }: RiskDisclaimerModalProps) => {
-  const [doNotShowAgain, setDoNotShowAgain] = useState(true);
+  const [doNotShowAgain, setDoNotShowAgain] = useState(false);
 
   return (
     <AlertDialog open={isOpen}>
