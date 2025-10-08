@@ -36,8 +36,10 @@ const MarketsTable = () => {
     }
   }, []);
 
-  const handleRiskAcknowledge = () => {
-    localStorage.setItem(RISK_ACK_KEY, 'true');
+  const handleRiskAcknowledge = (doNotShowAgain: boolean) => {
+    if (doNotShowAgain) {
+      localStorage.setItem(RISK_ACK_KEY, 'true');
+    }
     setShowRiskModal(false);
   };
 

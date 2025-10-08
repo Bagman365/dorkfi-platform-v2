@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -7,14 +8,17 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
+import { Checkbox } from "@/components/ui/checkbox";
 import { AlertTriangle } from "lucide-react";
 
 interface RiskDisclaimerModalProps {
   isOpen: boolean;
-  onAcknowledge: () => void;
+  onAcknowledge: (doNotShowAgain: boolean) => void;
 }
 
 const RiskDisclaimerModal = ({ isOpen, onAcknowledge }: RiskDisclaimerModalProps) => {
+  const [doNotShowAgain, setDoNotShowAgain] = useState(true);
+
   return (
     <AlertDialog open={isOpen}>
       <AlertDialogContent className="max-w-2xl border-amber-500/20 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
@@ -44,9 +48,24 @@ const RiskDisclaimerModal = ({ isOpen, onAcknowledge }: RiskDisclaimerModalProps
             </p>
           </AlertDialogDescription>
         </AlertDialogHeader>
+        
+        <div className="flex items-center gap-3 px-6 pb-4">
+          <Checkbox
+            id="do-not-show"
+            checked={doNotShowAgain}
+            onCheckedChange={(checked) => setDoNotShowAgain(checked as boolean)}
+          />
+          <label
+            htmlFor="do-not-show"
+            className="text-sm text-slate-400 cursor-pointer select-none"
+          >
+            Do not show this message again
+          </label>
+        </div>
+
         <AlertDialogFooter>
           <AlertDialogAction
-            onClick={onAcknowledge}
+            onClick={() => onAcknowledge(doNotShowAgain)}
             className="w-full bg-gradient-to-r from-ocean-teal to-ocean-teal/80 hover:from-ocean-teal/90 hover:to-ocean-teal/70 text-white font-semibold py-3 shadow-lg shadow-ocean-teal/20"
           >
             I Acknowledge the Risks – Continue
