@@ -1,5 +1,4 @@
-
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ExternalLink } from "lucide-react";
@@ -12,6 +11,9 @@ import WithdrawModal from "@/components/WithdrawModal";
 import MarketDetailModal from "@/components/MarketDetailModal";
 import MarketsHeroSection from "@/components/markets/MarketsHeroSection";
 import MarketsTableContent from "@/components/markets/MarketsTableContent";
+import RiskDisclaimerModal from "@/components/RiskDisclaimerModal";
+
+const RISK_ACK_KEY = 'dorkfi.riskAcknowledged';
 
 const MarketsTable = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -21,9 +23,23 @@ const MarketsTable = () => {
   const [withdrawModal, setWithdrawModal] = useState({ isOpen: false, asset: null });
   const [borrowModal, setBorrowModal] = useState({ isOpen: false, asset: null });
   const [detailModal, setDetailModal] = useState({ isOpen: false, asset: null, marketData: null });
+  const [showRiskModal, setShowRiskModal] = useState(false);
   
   // Mock user deposits - in real app, this would come from user's wallet/backend
   const [userDeposits] = useState<Record<string, number>>({});
+
+  // Check if user has acknowledged risks
+  useEffect(() => {
+    const hasAcknowledged = localStorage.getItem(RISK_ACK_KEY);
+    if (!hasAcknowledged) {
+      setShowRiskModal(true);
+    }
+  }, []);
+
+  const handleRiskAcknowledge = () => {
+    localStorage.setItem(RISK_ACK_KEY, 'true');
+    setShowRiskModal(false);
+  };
 
   const {
     data: markets,
@@ -219,6 +235,12 @@ const MarketsTable = () => {
             assetData={getAssetData(borrowModal.asset)}
           />
         )}
+
+        {/* Risk Disclaimer Modal */}
+        <RiskDisclaimerModal
+          isOpen={showRiskModal}
+          onAcknowledge={handleRiskAcknowledge}
+        />
       </div>
     </div>
   );
