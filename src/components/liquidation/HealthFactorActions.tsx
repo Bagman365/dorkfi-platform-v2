@@ -62,7 +62,7 @@ const HealthFactorActions = ({
       )}
 
       {/* Action Buttons with Smart Hierarchy */}
-      <div className="grid grid-cols-2 gap-3 pt-4">
+      <div className="grid grid-cols-2 gap-3">
         <Tooltip>
           <TooltipTrigger asChild>
             <Button 
