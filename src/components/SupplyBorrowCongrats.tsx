@@ -3,6 +3,8 @@ import React from "react";
 import { CheckCircle2, Sparkles, Link2, MessageCircle } from "lucide-react";
 import DorkFiButton from "@/components/ui/DorkFiButton";
 import { toast } from "@/hooks/use-toast";
+import { generateShareImage } from "@/utils/shareImageGenerator";
+import { getTokenImagePath } from "@/utils/tokenImageUtils";
 
 interface SupplyBorrowCongratsProps {
   transactionType: "deposit" | "borrow" | "withdraw" | "repay";
@@ -54,25 +56,30 @@ const SupplyBorrowCongrats: React.FC<SupplyBorrowCongratsProps> = ({
   const shareMessage = `Just ${action} ${amount} ${asset} on DorkFi! 🎯\n\nJoin me on DorkFi:`;
 
   const handleTwitterShare = async () => {
-    // Try native share with image first (works on mobile)
-    if (navigator.share && navigator.canShare) {
-      try {
-        const response = await fetch('/lovable-uploads/liquidation-share.png');
-        const blob = await response.blob();
-        const file = new File([blob], 'dorkfi-share.png', { type: 'image/png' });
-        
-        if (navigator.canShare({ files: [file] })) {
-          await navigator.share({
-            title: 'DorkFi Transaction Success',
-            text: shareMessage,
-            url: generateShareUrl(),
-            files: [file],
-          });
-          return;
-        }
-      } catch (err) {
-        // Fall through to Twitter web intent
+    try {
+      // Generate dynamic share image
+      const imageBlob = await generateShareImage({
+        tokenSymbol: asset,
+        tokenImagePath: getTokenImagePath(asset),
+        transactionType: transactionType === 'deposit' ? 'Deposit' : transactionType === 'borrow' ? 'Borrow' : 'Repay',
+        amount: amount,
+        markPrice: 'N/A',
+      });
+
+      const file = new File([imageBlob], 'dorkfi-share.png', { type: 'image/png' });
+      
+      // Try native share with image first (works on mobile)
+      if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+        await navigator.share({
+          title: 'DorkFi Transaction Success',
+          text: shareMessage,
+          url: generateShareUrl(),
+          files: [file],
+        });
+        return;
       }
+    } catch (err) {
+      console.error('Error generating share image:', err);
     }
     
     // Fallback to Twitter web intent (desktop)
