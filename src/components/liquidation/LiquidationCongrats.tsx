@@ -8,6 +8,7 @@ import { LiquidationParams } from './EnhancedAccountDetailModal';
 import { shortenAddress } from '@/utils/liquidationUtils';
 import { toast } from "@/hooks/use-toast";
 import { getTokenImagePath } from '@/utils/tokenImageUtils';
+import { generateShareImage } from '@/utils/shareImageGenerator';
 
 interface LiquidationCongratsProps {
   account: LiquidationAccount;
@@ -40,25 +41,36 @@ const LiquidationCongrats: React.FC<LiquidationCongratsProps> = ({
   const shareMessage = `Just executed a successful liquidation on DorkFi! 💰 Earned $${liquidationParams.liquidationBonus.toLocaleString()} bonus 🎯 Received ${liquidationParams.collateralAmount.toFixed(4)} ${liquidationParams.collateralToken}\n\nStart liquidating on DorkFi:`;
 
   const handleTwitterShare = async () => {
-    // Try native share with image first (works on mobile)
-    if (navigator.share && navigator.canShare) {
-      try {
-        const response = await fetch('/lovable-uploads/liquidation-share.png');
-        const blob = await response.blob();
-        const file = new File([blob], 'dorkfi-liquidation.png', { type: 'image/png' });
-        
-        if (navigator.canShare({ files: [file] })) {
-          await navigator.share({
-            title: 'DorkFi Liquidation Success',
-            text: shareMessage,
-            url: generateShareUrl(),
-            files: [file],
-          });
-          return;
-        }
-      } catch (err) {
-        // Fall through to Twitter web intent
+    try {
+      // Generate dynamic share image
+      const imageBlob = await generateShareImage({
+        tokenSymbol: liquidationParams.collateralToken,
+        tokenImagePath: getTokenImagePath(liquidationParams.collateralToken),
+        transactionType: 'Liquidation',
+        amount: `${liquidationParams.collateralAmount.toFixed(4)}`,
+        markPrice: `$${liquidationParams.liquidationBonus.toLocaleString()}`,
+        leftData: [
+          { label: 'Debt Repaid', value: `$${liquidationParams.repayAmountUSD.toLocaleString()} ${liquidationParams.repayToken}` },
+        ],
+        rightData: [
+          { label: 'Bonus Earned', value: `$${liquidationParams.liquidationBonus.toLocaleString()}` },
+        ],
+      });
+
+      const file = new File([imageBlob], 'dorkfi-liquidation.png', { type: 'image/png' });
+      
+      // Try native share with image first (works on mobile)
+      if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+        await navigator.share({
+          title: 'DorkFi Liquidation Success',
+          text: shareMessage,
+          url: generateShareUrl(),
+          files: [file],
+        });
+        return;
       }
+    } catch (err) {
+      console.error('Error generating share image:', err);
     }
     
     // Fallback to Twitter web intent (desktop)
@@ -92,10 +104,22 @@ const LiquidationCongrats: React.FC<LiquidationCongratsProps> = ({
   const handleNativeShare = async () => {
     if (navigator.share) {
       try {
-        // Fetch and convert image to blob for sharing
-        const response = await fetch('/lovable-uploads/liquidation-share.png');
-        const blob = await response.blob();
-        const file = new File([blob], 'dorkfi-liquidation.png', { type: 'image/png' });
+        // Generate dynamic share image
+        const imageBlob = await generateShareImage({
+          tokenSymbol: liquidationParams.collateralToken,
+          tokenImagePath: getTokenImagePath(liquidationParams.collateralToken),
+          transactionType: 'Liquidation',
+          amount: `${liquidationParams.collateralAmount.toFixed(4)}`,
+          markPrice: `$${liquidationParams.liquidationBonus.toLocaleString()}`,
+          leftData: [
+            { label: 'Debt Repaid', value: `$${liquidationParams.repayAmountUSD.toLocaleString()} ${liquidationParams.repayToken}` },
+          ],
+          rightData: [
+            { label: 'Bonus Earned', value: `$${liquidationParams.liquidationBonus.toLocaleString()}` },
+          ],
+        });
+
+        const file = new File([imageBlob], 'dorkfi-liquidation.png', { type: 'image/png' });
         
         await navigator.share({
           title: 'DorkFi Liquidation Success',
