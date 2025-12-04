@@ -141,8 +141,8 @@ const SupplyBorrowCongrats: React.FC<SupplyBorrowCongratsProps> = ({
         <Sparkles className="absolute -top-3 -right-3 text-highlight-aqua w-7 h-7 animate-bounce animation-delay-300" />
         <CheckCircle2 className="w-16 h-16 text-green-500 drop-shadow-xl bg-white dark:bg-slate-800 rounded-full p-1 border-4 border-whale-gold z-10" />
         <img
-          src={assetIcon}
-          alt={`${asset} icon`}
+          src="/lovable-uploads/eb092f67-df8a-436b-9ea3-a71f6a1bdf05.png"
+          alt="VOI icon"
           className="mt-[-30px] w-32 h-32 rounded-xl shadow-md border-4 border-whale-gold mx-auto bg-bubble-white dark:bg-slate-800 object-cover"
         />
       </div>
