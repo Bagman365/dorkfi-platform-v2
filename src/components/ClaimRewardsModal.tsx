@@ -99,9 +99,6 @@ const ClaimRewardsModal = ({
                 <p className="text-3xl font-bold text-whale-gold">
                   {availableRewards.toLocaleString()} {rewardTokenSymbol}
                 </p>
-                <p className="text-sm text-slate-400 dark:text-slate-500 mt-1">
-                  ≈ ${(availableRewards * 0.05).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-                </p>
               </div>
 
               {/* Reward Stats Card */}
