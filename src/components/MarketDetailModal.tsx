@@ -261,66 +261,6 @@ const MarketDetailModal = ({ isOpen, onClose, asset, marketData }: MarketDetailM
               </Card>
             </div>
 
-            {/* User Position Summary - Collapsible */}
-            <Collapsible open={positionExpanded} onOpenChange={setPositionExpanded}>
-              <Card className="border-purple-200 dark:border-purple-800/50 bg-gradient-to-r from-purple-50/50 to-indigo-50/50 dark:from-purple-900/20 dark:to-indigo-900/20">
-                <CollapsibleTrigger className="w-full">
-                  <CardHeader className="pb-2 cursor-pointer hover:bg-purple-100/30 dark:hover:bg-purple-900/30 transition-colors rounded-t-lg">
-                    <CardTitle className="text-base text-purple-700 dark:text-purple-400 flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <Wallet className="h-4 w-4" />
-                        Your Position
-                      </div>
-                      {positionExpanded ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
-                    </CardTitle>
-                  </CardHeader>
-                </CollapsibleTrigger>
-                <CollapsibleContent>
-                  <CardContent className="pt-0">
-                    {mockUserPosition.hasPosition ? (
-                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                        <div className="text-center p-2 bg-white/50 dark:bg-slate-800/50 rounded-lg">
-                          <div className="text-lg font-bold text-green-600 dark:text-green-400">
-                            {mockUserPosition.supplied.toLocaleString()} {asset}
-                          </div>
-                          <div className="text-xs text-slate-600 dark:text-slate-400">Supplied</div>
-                          <div className="text-xs text-slate-500">${mockUserPosition.suppliedUSD.toLocaleString()}</div>
-                        </div>
-                        <div className="text-center p-2 bg-white/50 dark:bg-slate-800/50 rounded-lg">
-                          <div className="text-lg font-bold text-red-600 dark:text-red-400">
-                            {mockUserPosition.borrowed.toLocaleString()} {asset}
-                          </div>
-                          <div className="text-xs text-slate-600 dark:text-slate-400">Borrowed</div>
-                          <div className="text-xs text-slate-500">${mockUserPosition.borrowedUSD.toLocaleString()}</div>
-                        </div>
-                        <div className="text-center p-2 bg-white/50 dark:bg-slate-800/50 rounded-lg">
-                          <div className="text-lg font-bold text-ocean-teal">
-                            +${mockUserPosition.earnings.toFixed(2)}
-                          </div>
-                          <div className="text-xs text-slate-600 dark:text-slate-400">Earnings</div>
-                          <div className="text-xs text-slate-500">All time</div>
-                        </div>
-                        <div className="text-center p-2 bg-white/50 dark:bg-slate-800/50 rounded-lg">
-                          <div className="text-lg font-bold text-blue-600 dark:text-blue-400">
-                            {mockUserPosition.healthFactor.toFixed(2)}
-                          </div>
-                          <div className="text-xs text-slate-600 dark:text-slate-400">Health Factor</div>
-                          <div className="text-xs text-green-500">Safe</div>
-                        </div>
-                      </div>
-                    ) : (
-                      <div className="text-center py-4">
-                        <p className="text-slate-600 dark:text-slate-400 mb-2">No position in this market</p>
-                        <Button size="sm" onClick={handleSupplyClick} className="bg-ocean-teal hover:bg-ocean-teal/90">
-                          Start Earning
-                        </Button>
-                      </div>
-                    )}
-                  </CardContent>
-                </CollapsibleContent>
-              </Card>
-            </Collapsible>
-
             {/* Row 1: Supply Info | Borrow Info */}
             <div className="grid lg:grid-cols-2 gap-4 auto-rows-fr">
               {/* Supply Information */}
@@ -591,6 +531,66 @@ const MarketDetailModal = ({ isOpen, onClose, asset, marketData }: MarketDetailM
                 </CardContent>
               </Card>
             </div>
+
+            {/* User Position Summary - Collapsible */}
+            <Collapsible open={positionExpanded} onOpenChange={setPositionExpanded}>
+              <Card className="border-purple-200 dark:border-purple-800/50 bg-gradient-to-r from-purple-50/50 to-indigo-50/50 dark:from-purple-900/20 dark:to-indigo-900/20">
+                <CollapsibleTrigger className="w-full">
+                  <CardHeader className="pb-2 cursor-pointer hover:bg-purple-100/30 dark:hover:bg-purple-900/30 transition-colors rounded-t-lg">
+                    <CardTitle className="text-base text-purple-700 dark:text-purple-400 flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <Wallet className="h-4 w-4" />
+                        Your Position
+                      </div>
+                      {positionExpanded ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+                    </CardTitle>
+                  </CardHeader>
+                </CollapsibleTrigger>
+                <CollapsibleContent>
+                  <CardContent className="pt-0">
+                    {mockUserPosition.hasPosition ? (
+                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                        <div className="text-center p-2 bg-white/50 dark:bg-slate-800/50 rounded-lg">
+                          <div className="text-lg font-bold text-green-600 dark:text-green-400">
+                            {mockUserPosition.supplied.toLocaleString()} {asset}
+                          </div>
+                          <div className="text-xs text-slate-600 dark:text-slate-400">Supplied</div>
+                          <div className="text-xs text-slate-500">${mockUserPosition.suppliedUSD.toLocaleString()}</div>
+                        </div>
+                        <div className="text-center p-2 bg-white/50 dark:bg-slate-800/50 rounded-lg">
+                          <div className="text-lg font-bold text-red-600 dark:text-red-400">
+                            {mockUserPosition.borrowed.toLocaleString()} {asset}
+                          </div>
+                          <div className="text-xs text-slate-600 dark:text-slate-400">Borrowed</div>
+                          <div className="text-xs text-slate-500">${mockUserPosition.borrowedUSD.toLocaleString()}</div>
+                        </div>
+                        <div className="text-center p-2 bg-white/50 dark:bg-slate-800/50 rounded-lg">
+                          <div className="text-lg font-bold text-ocean-teal">
+                            +${mockUserPosition.earnings.toFixed(2)}
+                          </div>
+                          <div className="text-xs text-slate-600 dark:text-slate-400">Earnings</div>
+                          <div className="text-xs text-slate-500">All time</div>
+                        </div>
+                        <div className="text-center p-2 bg-white/50 dark:bg-slate-800/50 rounded-lg">
+                          <div className="text-lg font-bold text-blue-600 dark:text-blue-400">
+                            {mockUserPosition.healthFactor.toFixed(2)}
+                          </div>
+                          <div className="text-xs text-slate-600 dark:text-slate-400">Health Factor</div>
+                          <div className="text-xs text-green-500">Safe</div>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="text-center py-4">
+                        <p className="text-slate-600 dark:text-slate-400 mb-2">No position in this market</p>
+                        <Button size="sm" onClick={handleSupplyClick} className="bg-ocean-teal hover:bg-ocean-teal/90">
+                          Start Earning
+                        </Button>
+                      </div>
+                    )}
+                  </CardContent>
+                </CollapsibleContent>
+              </Card>
+            </Collapsible>
           </div>
         </DialogContent>
       </Dialog>
