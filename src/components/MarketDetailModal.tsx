@@ -105,15 +105,14 @@ const MarketDetailModal = ({ isOpen, onClose, asset, marketData }: MarketDetailM
 
           <div className="space-y-4">
             {/* Price and Action Buttons - Top Section */}
-            <Card className="border-ocean-teal/30 dark:border-ocean-teal/40 bg-gradient-to-r from-ocean-teal/5 to-ocean-blue/5 dark:from-ocean-teal/10 dark:to-ocean-blue/10">
-              <CardContent className="p-4">
-                <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-                  <div className="flex items-center gap-4">
-                    <div className="flex items-center gap-3">
-                      <div className="text-sm text-slate-600 dark:text-slate-300">Current Price:</div>
-                      <div className="text-2xl font-bold text-slate-800 dark:text-white">
-                        ${tokenPrice.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-                      </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 auto-rows-fr">
+              {/* Price Card */}
+              <Card className="border-ocean-teal/30 dark:border-ocean-teal/40 bg-gradient-to-r from-ocean-teal/5 to-ocean-blue/5 dark:from-ocean-teal/10 dark:to-ocean-blue/10">
+                <CardContent className="p-4 h-full flex flex-col justify-center">
+                  <div className="text-sm text-slate-600 dark:text-slate-300 mb-1">Current Price</div>
+                  <div className="flex items-center gap-3">
+                    <div className="text-2xl font-bold text-slate-800 dark:text-white">
+                      ${tokenPrice.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                     </div>
                     <Badge 
                       className={`flex items-center gap-1 ${
@@ -131,24 +130,30 @@ const MarketDetailModal = ({ isOpen, onClose, asset, marketData }: MarketDetailM
                       <span className="text-xs opacity-70">24h</span>
                     </Badge>
                   </div>
-                  <div className="flex gap-3 w-full sm:w-auto">
+                </CardContent>
+              </Card>
+
+              {/* Actions Card */}
+              <Card className="border-ocean-teal/30 dark:border-ocean-teal/40 bg-gradient-to-r from-ocean-teal/5 to-ocean-blue/5 dark:from-ocean-teal/10 dark:to-ocean-blue/10">
+                <CardContent className="p-4 h-full flex items-center justify-center">
+                  <div className="flex gap-3 w-full">
                     <Button
                       onClick={handleSupplyClick}
-                      className="flex-1 sm:flex-none bg-ocean-teal hover:bg-ocean-teal/90 text-white h-10 px-6 text-base font-semibold"
+                      className="flex-1 bg-ocean-teal hover:bg-ocean-teal/90 text-white h-10 px-6 text-base font-semibold"
                     >
                       Deposit {asset}
                     </Button>
                     <Button
                       onClick={handleBorrowClick}
                       variant="outline"
-                      className="flex-1 sm:flex-none border-ocean-teal text-ocean-teal hover:bg-ocean-teal/10 dark:border-ocean-teal dark:text-ocean-teal h-10 px-6 text-base font-semibold"
+                      className="flex-1 border-ocean-teal text-ocean-teal hover:bg-ocean-teal/10 dark:border-ocean-teal dark:text-ocean-teal h-10 px-6 text-base font-semibold"
                     >
                       Borrow {asset}
                     </Button>
                   </div>
-                </div>
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
+            </div>
 
             {/* Row 1: Supply Info | Borrow Info */}
             <div className="grid lg:grid-cols-2 gap-4 auto-rows-fr">
