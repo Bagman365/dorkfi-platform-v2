@@ -1,7 +1,5 @@
 
-import { Info } from 'lucide-react';
 import { MarketData } from './types';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { cn } from '@/lib/utils';
 
 interface MarketOverviewProps {
@@ -61,19 +59,7 @@ export const MarketOverview = ({ marketData }: MarketOverviewProps) => {
       {/* Utilization Bar */}
       <div className="p-4 rounded-xl glass-card border border-border/30">
         <div className="flex items-center justify-between mb-2">
-          <div className="flex items-center gap-2">
-            <p className="text-sm font-medium text-foreground">Utilization Rate</p>
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger>
-                  <Info className="w-3.5 h-3.5 text-muted-foreground" />
-                </TooltipTrigger>
-                <TooltipContent className="max-w-xs">
-                  <p>Higher utilization leads to higher borrow APY and supply APY. When utilization exceeds the optimal rate (80%), rates increase sharply.</p>
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
-          </div>
+          <p className="text-sm font-medium text-foreground">Utilization Rate</p>
           <span className={cn("text-lg font-bold", utilizationTextColor)}>
             {marketData.utilization.toFixed(1)}%
           </span>
